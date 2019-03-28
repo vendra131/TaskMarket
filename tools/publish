@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 repo=$(git remote -v|grep "origin.*fetch"|sed 'sA^.*github.com/AA;sA/.*AA')
 rsync -e "ssh -p 22022" -ar target/ shippable@repo.kodekonveyor.com:/var/www/repo/TaskMarket/$repo/$BUILD_NUMBER
 normalized_branch=$(echo $BRANCH|sed 'sA[/_]A.Ag')
