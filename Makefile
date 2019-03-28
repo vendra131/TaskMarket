@@ -49,14 +49,15 @@ clean:
 	git clean -fdx
 	rm -rf zenta-tools
 
-target/taskmarket.issues.xml: target/taskmarket-implementedBehaviours.xml target/taskmarket-testcases.xml
-	tools/getGithubIssues kodekonveyor TaskMarket f279765590d25bedfc9f08f7fc39a8c39c891711 >target/taskmarket.issues.xml
+inputs/taskmarket.issues.xml: target/taskmarket-implementedBehaviours.xml target/taskmarket-testcases.xml
+	mkdir -p inputs
+	touch inputs/taskmarket.issues.xml #FIXME tools/getGithubIssues edemo PDEngine f279765590d25bedfc9f08f7fc39a8c39c891711 >inputs/taskmarket.issues.xml
 
 zentaworkaround:
 	mkdir -p ~/.zenta/.metadata/.plugins/org.eclipse.e4.workbench/
 	cp workbench.xmi ~/.zenta/.metadata/.plugins/org.eclipse.e4.workbench/
 	touch zentaworkaround
 
-target/bugpriorities.xml: taskmarket.consistencycheck target/taskmarket.issues.xml taskmarket.richescape target
-	zenta-xslt-runner -xsl:xslt/issue-priorities.xslt -s:taskmarket.consistencycheck -o:target/bugpriorities.xml issuesfile=target/taskmarket.issues.xml modelfile=taskmarket.richescape missingissuefile=target/missing.xml
+target/bugpriorities.xml: taskmarket.consistencycheck inputs/taskmarket.issues.xml taskmarket.richescape target
+	zenta-xslt-runner -xsl:xslt/issue-priorities.xslt -s:taskmarket.consistencycheck -o:target/bugpriorities.xml issuesfile=inputs/taskmarket.issues.xml modelfile=taskmarket.richescape missingissuefile=target/missing.xml
 

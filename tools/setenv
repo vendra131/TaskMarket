@@ -7,4 +7,4 @@ export REPO_FULL_NAME=home/$GITUSER
 export HEAD_BRANCH=home/$GITUSER
 export PULL_REQUEST=$GITCOMMIT
 export BASE_BRANCH=develop
-
+set +x

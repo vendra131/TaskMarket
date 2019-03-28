@@ -10,7 +10,7 @@ HEAD_BRANCH=$(normalize_branch_name_for_sonar "${HEAD_BRANCH}")
 BRANCH=$(normalize_branch_name_for_sonar "${BRANCH}")
 if [ $PULL_REQUEST != false ]
 then
-    mvn sonar:sonar -Dsonar.organization=kodekonveyor\
+    mvn sonar:sonar -Dsonar.organization=kode-konveyor\
         -Dsonar.pullrequest.provider=github\
         -Dsonar.pullrequest.github.repository=${REPO_FULL_NAME} \
         -Dsonar.pullrequest.branch=${HEAD_BRANCH}\
@@ -23,7 +23,7 @@ then
         -Dsonar.externalIssuesReportPaths=issuesReport.json\
         -Dsonar.java.pmd.reportPaths=target/pmd_full.xml
 else
-    mvn sonar:sonar -Dsonar.organization=kodekonveyor\
+    mvn sonar:sonar -Dsonar.organization=kode-konveyor\
      -Dsonar.java.pmd.reportPaths=target/pmd_full.xml\
      -Dsonar.branch.name=${BRANCH}\
      -Dsonar.externalIssuesReportPaths=issuesReport.json

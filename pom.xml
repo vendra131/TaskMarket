@@ -5,7 +5,7 @@
 
   <groupId>org.rulez.demokracia</groupId>
   <artifactId>TaskMarket</artifactId>
-  <version>0.0.1-feature_for_show_vote_the_user_needs_a_counted_assurance_40.5a79d7b</version>
+  <version>0.0.1-master.a2490eb</version>
   <packaging>war</packaging>
 
   <name>TaskMarket</name>

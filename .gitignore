@@ -17,6 +17,8 @@ taskmarket.rich
 taskmarket.richescape
 taskmarket.tabled.docbook
 taskmarket.tabled.html
-taskmarket/
+/taskmarket/
 issuesReport.json
 zentaworkaround
+/build/
+/inputs
