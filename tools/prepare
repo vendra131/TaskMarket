@@ -1,0 +1,15 @@
+set -x
+export DISPLAY=:0
+if [ ! -s /tmp/.X11-unix/X0 ]
+then
+    Xvnc4 -SecurityTypes none :0 &
+fi
+set +x
+. <(./tools/decrypt_secret_env $ORG_NAME)
+set -x
+#!!!do not do it on a production system!!!
+#run haveged instead
+sudo rm /dev/random
+sudo cp -a /dev/urandom /dev/random
+#end of workaround for low entropy level
+
