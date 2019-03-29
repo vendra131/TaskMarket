@@ -51,7 +51,7 @@ clean:
 
 inputs/taskmarket.issues.xml: target/taskmarket-implementedBehaviours.xml target/taskmarket-testcases.xml
 	mkdir -p inputs
-	touch inputs/taskmarket.issues.xml #FIXME tools/getGithubIssues edemo PDEngine f279765590d25bedfc9f08f7fc39a8c39c891711 >inputs/taskmarket.issues.xml
+	tools/getGithubIssues kode-konveyor TaskMarket f279765590d25bedfc9f08f7fc39a8c39c891711 >inputs/taskmarket.issues.xml
 
 zentaworkaround:
 	mkdir -p ~/.zenta/.metadata/.plugins/org.eclipse.e4.workbench/
