@@ -8,7 +8,7 @@ import re
 
 user=sys.argv[1]
 repo=sys.argv[2]
-token=os.environ['github_issue_reader_token']
+token=os.environ['issuetoken']
 
 def getLinksFromBody(body):
     return re.findall(r"\[(?P<txt>[^[]*)\]\((?P<uri>[^)]*)",body)
