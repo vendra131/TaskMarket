@@ -2,9 +2,9 @@ build_image: edemo/pdengine:latest
 language: python
 python:
   - 2.7
-integrations:
-  generic:
-    - integrationName: sonar
+#integrations:
+#  generic:
+#    - integrationName: sonar
 build:
   ci:
     - tools/script
