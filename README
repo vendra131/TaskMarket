@@ -1,0 +1,5 @@
+to be able to build in shippable, you should
+- send us your github username
+- create an ssh key integration in shippable, and send us its public key
+- create a key-value integration which exports your sonar token as 'sonarkey'
+
