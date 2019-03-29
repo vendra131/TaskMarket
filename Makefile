@@ -51,7 +51,7 @@ clean:
 
 inputs/taskmarket.issues.xml: target/taskmarket-implementedBehaviours.xml target/taskmarket-testcases.xml
 	mkdir -p inputs
-	tools/getGithubIssues kode-konveyor TaskMarket 0f911b3dfe0ddde15cba831977d35fa4b2004c9e >inputs/taskmarket.issues.xml
+	tools/getGithubIssues kode-konveyor TaskMarket >inputs/taskmarket.issues.xml
 
 zentaworkaround:
 	mkdir -p ~/.zenta/.metadata/.plugins/org.eclipse.e4.workbench/
