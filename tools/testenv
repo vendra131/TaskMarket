@@ -4,7 +4,7 @@ DEVHOME=${DEVHOME:-~/taskmarket-developer-home/}
 DEV_UID=$(id -u)
 DEV_GID=$(id -g)
 IMAGE=${IMAGE:-edemo/pdengine}
-docker run --rm -p 5900:5900 -e PULL_REQUEST=false -e DEVUID=${DEV_UID} -e DEVGID=${DEV_GID} -e ORG_NAME=local \
+docker run --rm -p 5900:5900 -e PULL_REQUEST=false -e DEVUID=${DEV_UID} -e DEVGID=${DEV_GID} -e ORG_NAME=$(whoami) \
     -v $(pwd):/build -v $(pwd)/tools/entrypoint:/pdengine/tools/entrypoint  -v $(pwd)/tools/setenv:/pdengine/tools/setenv -v ${DEVHOME}:/home/developer -v /tmp/.X11-unix:/tmp/.X11-unix \
     -w /build -it ${IMAGE}
 
