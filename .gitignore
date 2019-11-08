@@ -22,3 +22,8 @@ issuesReport.json
 zentaworkaround
 /build/
 /inputs
+javabuild
+shippable/
+taskmarket.interfaces
+taskmarket.stubs
+taskmarket.testdata
