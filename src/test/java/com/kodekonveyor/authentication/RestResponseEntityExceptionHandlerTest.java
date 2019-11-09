@@ -19,8 +19,8 @@ import org.springframework.web.context.request.WebRequest;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.market.LoggerService;
-import com.kodekonveyor.market.NotLoggedInException;
 import com.kodekonveyor.market.RestResponseEntityExceptionHandler;
+import com.kodekonveyor.market.UnauthorizedException;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -42,16 +42,28 @@ public class RestResponseEntityExceptionHandlerTest {
   public void setUp() {
     final UserTestData userTestData = new UserTestData();
     testData = new WebappTestData(userTestData);
-    final NotLoggedInException exception = mock(NotLoggedInException.class);
+  }
+
+  @DisplayName("if a NotLoggedInException is thrown, logs 'not logged in'")
+  @Test
+  public void test() {
+    final NotLoggedInException exception = new NotLoggedInException(null);
     final WebRequest request = mock(WebRequest.class);
     restResponseEntityExceptionHandler
         .handleNotLoggedInException(exception, request);
+    verify(loggerService).call(testData.NOT_LOGGED_IN);
   }
 
-  @DisplayName("logs 'not logged in'")
+  @DisplayName(
+    "if a UnauthorizedException is thrown, logs 'unauthorized'"
+  )
   @Test
-  public void test() {
-    verify(loggerService).call(testData.NOT_LOGGED_IN);
+  public void test1() {
+    final UnauthorizedException exception = new UnauthorizedException("foo");
+    final WebRequest request = mock(WebRequest.class);
+    restResponseEntityExceptionHandler
+        .handleNotLoggedInException(exception, request);
+    verify(loggerService).call(testData.UNAUTHORIZED);
   }
 
 }

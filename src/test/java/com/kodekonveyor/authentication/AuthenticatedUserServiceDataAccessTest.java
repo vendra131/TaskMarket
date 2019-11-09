@@ -15,7 +15,6 @@ import org.mockito.quality.Strictness;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.exception.ThrowableTester;
-import com.kodekonveyor.market.NotLoggedInException;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -75,11 +74,32 @@ public class AuthenticatedUserServiceDataAccessTest
 
   @Test
   @DisplayName(
-    "When returned credential is null, we throw NotLoggedInException"
+    "When returned credential is null, the exception message is 'No Credential'"
   )
   public void test5() {
     AuthenticationStubs.nullCredential();
     tester.assertThrows(() -> authenticatedUserService.call())
         .assertMessageIs(userTestData.NO_CREDENTIAL);
   }
+
+  @Test
+  @DisplayName(
+    "When there is no user for the authentication, we throw NotLoggedInException."
+  )
+  public void test7() {
+    AuthenticationStubs.badAuthenticated(userTestData);
+    tester.assertThrows(() -> authenticatedUserService.call())
+        .assertException(NotLoggedInException.class);
+  }
+
+  @Test
+  @DisplayName(
+    "When there is no user for the authentication, the exception message is 'This should not happen'"
+  )
+  public void test8() {
+    AuthenticationStubs.badAuthenticated(userTestData);
+    tester.assertThrows(() -> authenticatedUserService.call())
+        .assertMessageIs(userTestData.SHOULD_NOT_HAPPEN);
+  }
+
 }
