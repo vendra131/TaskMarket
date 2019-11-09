@@ -6,12 +6,15 @@ import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-public class RemoteAuthenticationDTO implements Authentication {
+import com.kodekonveyor.annotations.InterfaceClass;
+
+@InterfaceClass
+public class RemoteAuthentication implements Authentication {
 
   private static final long serialVersionUID = 1L;
   private final UserEntity user;
 
-  public RemoteAuthenticationDTO(final UserEntity user) {
+  public RemoteAuthentication(final UserEntity user) {
     this.user = user;
   }
 
@@ -22,7 +25,7 @@ public class RemoteAuthenticationDTO implements Authentication {
 
   @Override
   public Object getCredentials() {
-    return user.getAuth0id();
+    return user.getLogin();
   }
 
   @Override

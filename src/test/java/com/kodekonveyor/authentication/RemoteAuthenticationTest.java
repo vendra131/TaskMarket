@@ -21,16 +21,16 @@ import com.kodekonveyor.annotations.TestedService;
 @MockitoSettings(strictness = Strictness.LENIENT)
 @RunWith(MockitoJUnitRunner.class)
 @TestedBehaviour("Uses the userEntity to return various data")
-@TestedService("RemoteAuthenticationDTO")
-public class RemoteAuthenticationDTOTest {
+@TestedService("RemoteAuthentication")
+public class RemoteAuthenticationTest {
 
-  private RemoteAuthenticationDTO auth;
+  private RemoteAuthentication auth;
   private UserTestData testData;
 
   @BeforeEach
   public void setUp() {
     testData = new UserTestData();
-    auth = new RemoteAuthenticationDTO(testData.USER);
+    auth = new RemoteAuthentication(testData.USER);
   }
 
   @DisplayName("getAuthorities returns an empty list")
@@ -39,10 +39,10 @@ public class RemoteAuthenticationDTOTest {
     assertEquals(testData.EMPTY_LIST, auth.getAuthorities());
   }
 
-  @DisplayName("getCredentials returns the auth0 id")
+  @DisplayName("getCredentials returns the login name")
   @Test
   public void test1() {
-    assertEquals(testData.AUTH0ID, auth.getCredentials());
+    assertEquals(testData.LOGIN, auth.getCredentials());
   }
 
   @DisplayName("getDetails returns the user")
