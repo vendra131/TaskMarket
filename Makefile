@@ -4,4 +4,3 @@ export GITHUB_ORGANIZATION=kode-konveyor
 LANGUAGE=java
 
 include /usr/local/toolchain/rules.java
-
