@@ -18,6 +18,7 @@ import org.mockito.quality.Strictness;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.market.LogSeverityEnum;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -39,14 +40,17 @@ public class ListleadControllerStorageTest extends ListLeadControllerTestBase {
   @DisplayName("The data is listed")
   void test() {
     final List<LeadDTO> ret = listleadController.call();
-    assertEquals(leadTestData.LEAD_LIST, ret);
+    assertEquals(leadTestData.LEAD_DTO_LIST, ret);
   }
 
   @Test
   @DisplayName("The call of the service is logged")
   void test2() {
     listleadController.call();
-    verify(loggerService).call(leadTestData.LIST_LEAD_LOG);
+    verify(loggerService)
+        .call(
+            logTestData.CALL, LogSeverityEnum.DEBUG, leadTestData.LIST_LEAD_LOG
+        );
   }
 
 }

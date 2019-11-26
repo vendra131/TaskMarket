@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <ruleset name="Kode Konveyor WAR"
 	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -85,7 +84,10 @@ and should be marked with @Delegate or @InterfaceClass"
    matches(@Image,'[A-Z][a-z0-9]*Entity$') or
    matches(@Image,'[A-Z][a-z0-9]*DTO$') or
    matches(@Image,'[A-Z][a-z0-9]*Repository$') or
+   matches(@Image,'[A-Z][a-z0-9]*Constants$') or
+   matches(@Image,'[A-Z][a-z0-9]*Exception$') or
    matches(@Image,'[A-Z][a-z0-9]*Factory$') or
+   matches(@Image,'[A-Z][a-z0-9]*IT$') or
    matches(@Image,'[A-Z][a-z0-9]*Stubs$')
 ) and not(
    ../Annotation/MarkerAnnotation/Name/@Image = 'InterfaceClass' or
@@ -145,6 +147,63 @@ see message
     @Private = false()
 ]|
 .[..//MarkerAnnotation[Name/@Image='Getter']]
+)
+]]>
+         </value>
+      </property>
+   </properties>
+</rule>
+<rule name="ShortVariables"
+      language="java"
+      message="No short variables, except id as field"
+      class="net.sourceforge.pmd.lang.rule.XPathRule">
+   <description>
+
+   </description>
+   <priority>3</priority>
+   <properties>
+      <property name="version" value="2.0"/>
+      <property name="xpath">
+         <value>
+<![CDATA[
+//VariableDeclaratorId[string-length(@Image) < 3 and not(
+   (@Image = 'id' and ../../local-name() = 'FieldDeclaration')
+)]
+
+]]>
+         </value>
+      </property>
+   </properties>
+</rule>
+
+<rule name="TestRules"
+      language="java"
+      message="A Test class should have the standard annotations, extend a TestBase, and have no literals, constants or stubs"
+      class="net.sourceforge.pmd.lang.rule.XPathRule">
+   <description>
+
+   </description>
+   <priority>3</priority>
+   <properties>
+      <property name="version" value="2.0"/>
+      <property name="xpath">
+         <value>
+<![CDATA[
+//ClassOrInterfaceDeclaration[ends-with(@Image,'Test')]/(
+    //MethodDeclaration//Literal[not(
+        (@IntLiteral=true() and @ValueAsInt < 2) or
+        ../../../../../../../PrimaryPrefix/Name/@Image='times' or
+        BooleanLiteral or
+        NullLiteral)]|
+    .[not(ExtendsList)]|
+    .[not(ExtendsList/ClassOrInterfaceType[ends-with(@Image,'TestBase')])]|
+    .[not(../Annotation//Name[@Image='TestedService'])]|
+    .[not(../Annotation//Name[@Image='TestedBehaviour'])]|
+    .[not(../Annotation//Name[@Image='RunWith'])]|
+    .[not(../Annotation//Name[@Image='MockitoSettings'])]|
+    .[not(../Annotation//Name[@Image='ExtendWith'])]|
+    //PrimaryPrefix/Name[@Image='doReturn' or @Image='doThrow']|
+    //FieldDeclaration[@Static = true()]
 )
 ]]>
          </value>

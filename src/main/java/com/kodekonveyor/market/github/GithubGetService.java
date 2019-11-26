@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.kodekonveyor.annotations.ExcludeFromCodeCoverage;
+import com.kodekonveyor.market.LogSeverityEnum;
 import com.kodekonveyor.market.LoggerService;
 import com.kodekonveyor.market.proxies.ObjectMapperService;
 
@@ -27,13 +28,13 @@ public class GithubGetService {
   public <ValueType> ValueType
       call(final String command, final Class<ValueType> cls) {
     final String uri = "https://api.github.com" + command;
-    loggerService.call("uri:" + uri);
+    loggerService.call("githubCall", LogSeverityEnum.DEBUG, uri);
     URL url;
     try {
       url = new URL(uri);
-    } catch (final MalformedURLException e) {
+    } catch (final MalformedURLException exception) {
       throw new ResponseStatusException(
-          HttpStatus.INTERNAL_SERVER_ERROR, "internal error", e
+          HttpStatus.INTERNAL_SERVER_ERROR, "internal error", exception
       );
     }
 
@@ -42,9 +43,9 @@ public class GithubGetService {
     final ValueType value;
     try {
       value = objectMapperProxy.readValue(url, cls);
-    } catch (final IOException e) {
+    } catch (final IOException exception) {
       throw new ResponseStatusException(
-          HttpStatus.SERVICE_UNAVAILABLE, "cannot connect to github", e
+          HttpStatus.SERVICE_UNAVAILABLE, "cannot connect to github", exception
       );
     }
     return value;

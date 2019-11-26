@@ -23,12 +23,11 @@ public class RoleEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;// NOPMD
+  private long id;
   @Column(name = "rolename")
   private String name;
 
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
   @EqualsAndHashCode.Exclude
   private Set<UserEntity> users = new HashSet<>();
-
 }
