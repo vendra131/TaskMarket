@@ -18,9 +18,12 @@ public class PaymentUpdateController {
   AuthenticatedUserService authenticatedUserService;
 
   public Object call(final String paymentDetails) {
+    PaymentChannelUtil.validatePaymentDetails(paymentDetails);
     final UserEntity user = authenticatedUserService.call();
+
     if (!CheckRoleUtil.hasRole(user, MarketConstants.CAN_BE_PAID_ROLE))
       throw new UnauthorizedException(IN_PAYMENT_UPDATE);
+
     return null;
   }
 
