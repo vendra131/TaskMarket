@@ -15,6 +15,9 @@ public class MarketConstants {
   public static final String FIRST_NAME_NULL_EXCEPTION =
       "First name cannot be null";
 
+  public static final String IN_ADD_TO_ROLE = "in add to role";
+  public static final String IN_PAYMENT_UPDATE = "in payment update";
+
   public static final String INTEREST_NULL_EXCEPTION =
       "Interest cannot be null";
 
@@ -26,6 +29,7 @@ public class MarketConstants {
 
   public final static String INVALID_PAYMENT_DETAILS =
       "Please enter valid payment details";
+
   public static final String KODEKONVEYOR_SALES_ROLE = "kodekonveyor_sales";
 
   public static final String PAYMMENT_CHANNEL_SEPARATOR = ":";
