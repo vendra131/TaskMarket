@@ -1,23 +1,21 @@
 package com.kodekonveyor.authentication;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;//NOPMD
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -26,128 +24,165 @@ import org.springframework.security.core.Authentication;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.market.GeneralTestHelper;
-import com.kodekonveyor.market.LoggerService;
+import com.kodekonveyor.market.LogSeverityEnum;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @RunWith(MockitoJUnitRunner.class)
 @TestedBehaviour("Puts the remote user into the Authentication object")
 @TestedService("RemoteAuthenticationFilter")
-public class RemoteAuthenticationFilterTest {
+public class RemoteAuthenticationFilterTest
+    extends RemoteAuthenticationFilterTestBase {
 
-  @InjectMocks
-  private RemoteAuthenticationFilter remoteAuthenticationFilter;
-
-  @Mock
-  private UserEntityRepository userRepository;
-
-  @Mock
-  private LoggerService loggerService;
-
-  @Mock
-  private ServletResponse servletResponse;
-
-  @Mock
-  private FilterChain filterChain;
-
-  private WebappTestData testData;
-
-  @Captor
-  private ArgumentCaptor<Authentication> newAuthentication;
-
-  @Captor
-  private ArgumentCaptor<String> stringCaptor;
-
-  private UserTestData userTestData;
-
-  @BeforeEach
-  public void setUp() {
-    userTestData = new UserTestData();
-    testData = new WebappTestData(userTestData);
-    UserEntityRepositoryStubs.behaviour(userRepository, userTestData);
-  }
-
-  @DisplayName("if authenticated, does not set authenticaed user")
-  @Test
-  public void test() throws IOException, ServletException {
-    AuthenticationStubs.authenticated(userTestData);
-    remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    verify(AuthenticationStubs.securityContext, never())
+  private void assertRemoteUserIsCorrectlySetAndCleared(final String login) {
+    verify(AuthenticationStubs.securityContext, times(2))
         .setAuthentication(newAuthentication.capture());
+    final List<Authentication> capturedValues =
+        newAuthentication.getAllValues();
+    assertEquals(
+        login, capturedValues.get(0).getCredentials()
+    );
+    assertEquals(null, capturedValues.get(1));
   }
 
   @DisplayName("if authenticated, calls the filter chain")
   @Test
   public void test01() throws IOException, ServletException {
-    AuthenticationStubs.authenticated(userTestData);
+    AuthenticationStubs.authenticated();
+    HttpServletRequest request = RemoteAuthenticationFilterTestData.getRequestUser();
     remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    verify(filterChain).doFilter(testData.REQUEST, servletResponse);
+        .doFilter(
+            request,
+            servletResponse,
+            filterChain
+        );
+    verify(filterChain).doFilter(
+        request, servletResponse
+    );
   }
 
-  @DisplayName("if the filter authenticates someone, logs the authentication")
+  @DisplayName(
+    "logs the authentication attempt"
+  )
   @Test
   public void test02() throws IOException, ServletException {
     AuthenticationStubs.nullAuthentication();
     remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    verify(loggerService, times(3)).call(stringCaptor.capture());
-    GeneralTestHelper.assertContains("authenticated", stringCaptor.getValue());
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    verify(loggerService)
+        .call(
+            RemoteAuthenticationFilterTestData.AUTHENTICATING,
+            LogSeverityEnum.DEBUG,
+            RemoteAuthenticationFilterTestData.EMPTY_MESSAGE
+        );
+  }
+
+  @DisplayName("logs the authenticated user")
+  @Test
+  public void test03() throws IOException, ServletException {
+    AuthenticationStubs.nullAuthentication();
+    remoteAuthenticationFilter
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    verify(loggerService)
+        .call(
+            RemoteAuthenticationFilterTestData.LOGIN, LogSeverityEnum.INFO,
+            UserEntityTestData.LOGIN
+        );
   }
 
   @DisplayName(
-    "if Authentication is null, sets the remote user as authenticated"
+    "if Authentication is null, sets the remote user as authenticated, and clears it after the request is processed"
   )
   @Test
   public void test1() throws IOException, ServletException {
     AuthenticationStubs.nullAuthentication();
     remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    assertRemoteUserIsCorrectlySet(userTestData.LOGIN);
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    assertRemoteUserIsCorrectlySetAndCleared(UserEntityTestData.LOGIN);
   }
 
   @DisplayName(
-    "if Authentication is anonymous, sets the remote user as authenticated"
+    "if Authentication is anonymous, sets the remote user as authenticated, and clears it after the request is processed"
   )
   @Test
   public void test2() throws IOException, ServletException {
     AuthenticationStubs.anonymous();
     remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    assertRemoteUserIsCorrectlySet(userTestData.LOGIN);
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    assertRemoteUserIsCorrectlySetAndCleared(UserEntityTestData.LOGIN);
   }
 
   @DisplayName(
-    "if Authentication is null and the remote user exists, sets the remote user as authenticated"
+    "if Authentication is null and the remote user exists, sets the remote user as authenticated, and clears it after the request is processed"
   )
   @Test
   public void test3() throws IOException, ServletException {
     AuthenticationStubs.nullAuthentication();
     remoteAuthenticationFilter
-        .doFilter(testData.REQUEST, servletResponse, filterChain);
-    assertRemoteUserIsCorrectlySet(userTestData.LOGIN);
-  }
-
-  private void assertRemoteUserIsCorrectlySet(final String login) {
-    verify(AuthenticationStubs.securityContext)
-        .setAuthentication(newAuthentication.capture());
-    assertEquals(
-        login, newAuthentication.getValue().getCredentials()
-    );
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    assertRemoteUserIsCorrectlySetAndCleared(UserEntityTestData.LOGIN);
   }
 
   @DisplayName(
-    "if Authentication is null and the remote user does not exists, creates an authenticated user"
+    "if Authentication is null and the remote user does not exists, creates an authenticated user, and clears authentication after the request is processed"
   )
   @Test
   public void test4() throws IOException, ServletException {
     AuthenticationStubs.nullAuthentication();
     remoteAuthenticationFilter.doFilter(
-        testData.REQUEST_WITH_UNKNOWN_USER, servletResponse, filterChain
+        RemoteAuthenticationFilterTestData.getRequestUserUnknown(),
+        servletResponse, filterChain
     );
-    assertRemoteUserIsCorrectlySet(userTestData.BAD_LOGIN);
+    assertRemoteUserIsCorrectlySetAndCleared(UserEntityTestData.LOGIN_BAD);
+  }
+
+  @DisplayName("puts the username to Mapped Diagnostic Context for log")
+  @Test
+  public void testMdc1() throws IOException, ServletException {
+    AuthenticationStubs.authenticated();
+    remoteAuthenticationFilter
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    verify(mdc).put(
+        RemoteAuthenticationFilterTestData.AUTH_USER, UserEntityTestData.LOGIN
+    );
+  }
+
+  @DisplayName("puts the session id to Mapped Diagnostic Context for log")
+  @Test
+  public void testMdc2() throws IOException, ServletException {
+    AuthenticationStubs.authenticated();
+    remoteAuthenticationFilter
+        .doFilter(
+            RemoteAuthenticationFilterTestData.getRequestUser(),
+            servletResponse,
+            filterChain
+        );
+    verify(mdc)
+        .put(eq(RemoteAuthenticationFilterTestData.AUTH_SESSION), anyString());
   }
 
 }

@@ -28,10 +28,9 @@ public class ListleadControllerRolesTest extends ListLeadControllerTestBase {
   )
   void test() {
     AuthenticatedUserStubs
-        .authenticated(authenticatedUserService, userTestData);
+        .authenticated(authenticatedUserService);
 
-    final ThrowableTester tester = new ThrowableTester();
-    tester.assertThrows(() -> listleadController.call())
+    ThrowableTester.assertThrows(() -> listleadController.call())
         .assertException(UnauthorizedException.class);
   }
 

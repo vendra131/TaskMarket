@@ -2,7 +2,6 @@ package com.kodekonveyor.authentication;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,20 +23,13 @@ import com.kodekonveyor.exception.ThrowableTester;
 public class AuthenticatedUserServiceDataAccessTest
     extends AuthenticatedUserServiceTestBase {
 
-  private ThrowableTester tester;
-
-  @Override
-  @BeforeEach
-  public void setUp() {
-    super.setUp();
-    tester = new ThrowableTester();
-  }
-
   @Test
   @DisplayName("Gets the user by the authenticated name")
   public void test() {
-    AuthenticationStubs.authenticated(userTestData);
-    assertEquals(userTestData.USER, authenticatedUserService.call());
+    AuthenticationStubs.authenticated();
+    assertEquals(
+        UserEntityTestData.get(), authenticatedUserService.call()
+    );
   }
 
   @Test
@@ -46,8 +38,7 @@ public class AuthenticatedUserServiceDataAccessTest
   )
   public void test2() {
     AuthenticationStubs.nullAuthentication();
-    final ThrowableTester tester = new ThrowableTester();
-    tester.assertThrows(() -> authenticatedUserService.call())
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
         .assertException(NotLoggedInException.class);
   }
 
@@ -57,9 +48,8 @@ public class AuthenticatedUserServiceDataAccessTest
   )
   public void test3() {
     AuthenticationStubs.nullAuthentication();
-    final ThrowableTester tester = new ThrowableTester();
-    tester.assertThrows(() -> authenticatedUserService.call())
-        .assertMessageIs(userTestData.NO_AUTHENTICATION);
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
+        .assertMessageIs(AuthenticatedUserServiceTestData.NO_AUTHENTICATION);
   }
 
   @Test
@@ -68,7 +58,7 @@ public class AuthenticatedUserServiceDataAccessTest
   )
   public void test4() {
     AuthenticationStubs.nullCredential();
-    tester.assertThrows(() -> authenticatedUserService.call())
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
         .assertException(NotLoggedInException.class);
   }
 
@@ -78,8 +68,8 @@ public class AuthenticatedUserServiceDataAccessTest
   )
   public void test5() {
     AuthenticationStubs.nullCredential();
-    tester.assertThrows(() -> authenticatedUserService.call())
-        .assertMessageIs(userTestData.NO_CREDENTIAL);
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
+        .assertMessageIs(AuthenticatedUserServiceTestData.NO_CREDENTIAL);
   }
 
   @Test
@@ -87,8 +77,8 @@ public class AuthenticatedUserServiceDataAccessTest
     "When there is no user for the authentication, we throw NotLoggedInException."
   )
   public void test7() {
-    AuthenticationStubs.badAuthenticated(userTestData);
-    tester.assertThrows(() -> authenticatedUserService.call())
+    AuthenticationStubs.badAuthenticated();
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
         .assertException(NotLoggedInException.class);
   }
 
@@ -97,9 +87,9 @@ public class AuthenticatedUserServiceDataAccessTest
     "When there is no user for the authentication, the exception message is 'This should not happen'"
   )
   public void test8() {
-    AuthenticationStubs.badAuthenticated(userTestData);
-    tester.assertThrows(() -> authenticatedUserService.call())
-        .assertMessageIs(userTestData.SHOULD_NOT_HAPPEN);
+    AuthenticationStubs.badAuthenticated();
+    ThrowableTester.assertThrows(() -> authenticatedUserService.call())
+        .assertMessageIs(AuthenticatedUserServiceTestData.SHOULD_NOT_HAPPEN);
   }
 
 }

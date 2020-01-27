@@ -19,7 +19,6 @@ taskmarket.tabled.docbook
 taskmarket.tabled.html
 /taskmarket/
 issuesReport.json
-zentaworkaround
 /build/
 /inputs
 javabuild
@@ -27,3 +26,5 @@ shippable/
 taskmarket.interfaces
 taskmarket.stubs
 taskmarket.testdata
+runapache
+taskmarket.zenta

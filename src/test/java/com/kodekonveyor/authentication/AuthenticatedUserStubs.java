@@ -4,18 +4,31 @@ import static org.mockito.Mockito.doReturn;
 
 public class AuthenticatedUserStubs {
 
-  public static void authenticated(
-      final AuthenticatedUserService authenticatedUserService,
-      final UserTestData userTestData
+  public static void
+      authenticated(final AuthenticatedUserService authenticatedUserService) {
+    doReturn(UserEntityTestData.get()).when(authenticatedUserService)
+        .call();
+  }
+
+  public static void
+      canBePayed(final AuthenticatedUserService authenticatedUserService) {
+    doReturn(UserEntityTestData.getRoleCanbePayed())
+        .when(authenticatedUserService)
+        .call();
+  }
+
+  public static void noMarketuser(
+      final AuthenticatedUserService authenticatedUserService
   ) {
-    doReturn(userTestData.USER).when(authenticatedUserService).call();
+    doReturn(UserEntityTestData.getLoginNoMarket())
+        .when(authenticatedUserService)
+        .call();
   }
 
   public static void salesUser(
-      final AuthenticatedUserService authenticatedUserService,
-      final UserTestData userTestData
+      final AuthenticatedUserService authenticatedUserService
   ) {
-    doReturn(userTestData.SALES_USER).when(authenticatedUserService).call();
+    doReturn(UserEntityTestData.getRoleSales()).when(authenticatedUserService)
+        .call();
   }
-
 }

@@ -1,7 +1,6 @@
 package com.kodekonveyor.market.lead;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class ListleadControllerStorageTest extends ListLeadControllerTestBase {
   void setUp() {
     super.setUp();
     AuthenticatedUserStubs
-        .salesUser(authenticatedUserService, userTestData);
+        .salesUser(authenticatedUserService);
 
   }
 
@@ -39,14 +38,7 @@ public class ListleadControllerStorageTest extends ListLeadControllerTestBase {
   @DisplayName("The data is listed")
   void test() {
     final List<LeadDTO> ret = listleadController.call();
-    assertEquals(leadTestData.LEAD_LIST, ret);
-  }
-
-  @Test
-  @DisplayName("The call of the service is logged")
-  void test2() {
-    listleadController.call();
-    verify(loggerService).call(leadTestData.LIST_LEAD_LOG);
+    assertEquals(LeadDTOTestData.list(), ret);
   }
 
 }

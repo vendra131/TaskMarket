@@ -1,58 +1,25 @@
 package com.kodekonveyor.market.register;
 
-import static org.mockito.Mockito.mock;
-
-import java.io.StringWriter;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.kodekonveyor.authentication.UserDTO;
-import com.kodekonveyor.authentication.UserTestData;
-
 public class RegisterTestData {
 
-  public final String NEXT_URL = "/foo.html";
-  public final String GITHUB_EMAIL = "user@example.com";
-  public final String GITHUB_USER = "userke";
-  public final String GITHUB_SECRET = "s3cr3t";
-  public StringWriter RESPONSE_WRITER;
-  public UserDTO USER_DTO;
-  public MarketUserDTO MARKET_USER;
-  public HttpServletRequest AUTHENTICATED_REQUEST;
-  public HttpServletRequest UNAUTHENTICATED_REQUEST;
+  public final static String INVALID_PAYMENT_CHANNEL =
+      "sedpa:AAAABBC230";
 
-  public final UserTestData userTestData;
+  public final static String INVALID_PAYMENT_DETAILS1 = "sesepa:AAAAr2BBC230";
+  public final static String INVALID_PAYPAL_PAYMENT_DETAILS =
+      "paypal:john.bigbootexample.com";
+  public final static String INVALID_SEPA_PAYMENT_DETAILS =
+      "sepa:DE89370400440532013000";
+  public final static String INVALID_TRANSFERWISE_PAYMENT_DETAILS =
+      "transferwise:DE8937040044053201fjioe&3000";
+  public static final String PAYMENT_DETAILS =
+      "paypal:john.bigboot@example.com";
+  public final static String PAYMENT_DETAILS_SEPA = "sepa:AAAABBC230";
 
-  public RegisterTestData(final UserTestData userTestData) {
-    this.userTestData = userTestData;
-    USER_DTO = createUSER_DTO();
-    MARKET_USER = createMARKET_USER();
-    AUTHENTICATED_REQUEST =
-        createAUTHENTICATED_REQUEST();
-    UNAUTHENTICATED_REQUEST =
-        create_UNAUTHENTICATED_REQUEST();
-  }
+  public final static String PAYMENT_DETAILS_TRANSFERWISE =
+      "transferwise:DE89370400440532013000";
 
-  private HttpServletRequest
-      createAUTHENTICATED_REQUEST() {
-    return create_UNAUTHENTICATED_REQUEST();
-  }
-
-  private HttpServletRequest create_UNAUTHENTICATED_REQUEST() {
-    return mock(HttpServletRequest.class);
-  }
-
-  private UserDTO createUSER_DTO() {
-    final UserDTO userDTO = new UserDTO();
-    userDTO.setLogin(GITHUB_USER);
-    userDTO.setId(userTestData.USER_ID);
-    return userDTO;
-  }
-
-  private MarketUserDTO createMARKET_USER() {
-    final MarketUserDTO marketUserDTO = new MarketUserDTO();
-    marketUserDTO.setLogin(userTestData.LOGIN);
-    return marketUserDTO;
-  }
+  public final static String PROJECTNAME = "kode-konveyor/example";
+  public final static String PROJECTROLE = "coder";
 
 }
