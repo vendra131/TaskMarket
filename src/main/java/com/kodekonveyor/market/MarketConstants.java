@@ -15,7 +15,9 @@ public class MarketConstants {
   public static final String FIRST_NAME_NULL_EXCEPTION =
       "First name cannot be null";
 
+  public static final String GENERAL_TERMS = "General Terms";
   public static final String IN_ADD_TO_ROLE = "in add to role";
+
   public static final String IN_PAYMENT_UPDATE = "in payment update";
 
   public static final String INTEREST_NULL_EXCEPTION =
@@ -33,11 +35,19 @@ public class MarketConstants {
   public static final String INVALID_PAYMENT_REGIME_EXCEPTION =
       "Invalid payment regime";
 
+  public static final String KODEKONVEYOR_CONTRACT = "kodekonveyor_contract";
+
   public static final String KODEKONVEYOR_SALES_ROLE = "kodekonveyor_sales";
+
+  public static final String KODEKONVEYOR_TECHNICAL = "kodekonveyor_technical";
+
+  public static final String MANAGER = "manager";
 
   public static final String PAYMENT_REGIME = "restofworld";
 
   public static final String PAYMMENT_CHANNEL_SEPARATOR = ":";
+
+  public static final String PRIVATE_PROJECT_TYPE = "private";
 
   public static final String REGEX_PAYPAL = "^[A-Za-z0-9+_.-]+@(.+)$";
 
@@ -46,5 +56,11 @@ public class MarketConstants {
 
   public static final String REGEX_TRANSFERWISE =
       "\\b[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?\\b";
+
+  public static final String REGISTERED_ROLE = "registered";
+
+  public static final String TERMS_NOT_ACCEPTED = "Contract terms not accepted";
+
+  public static final String UNDERSCORE = "_";
 
 }

@@ -1,5 +1,7 @@
 package com.kodekonveyor.market.register;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,53 +14,53 @@ import org.mockito.quality.Strictness;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.RoleEntityTestData;
+import com.kodekonveyor.authentication.UserEntityTestData;
 import com.kodekonveyor.exception.ThrowableTester;
-import com.kodekonveyor.market.UnauthorizedException;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @RunWith(MockitoJUnitRunner.class)
-@TestedBehaviour("registration needed")
+@TestedBehaviour("roles")
 @TestedService("AddToRoleController")
-public class AddToRoleControllerRegistrationNeededTest
-    extends AddToRoleControllerTestBase {
+public class AddToRoleControllerRolesTest extends AddToRoleControllerTestBase {
 
   @Test
   @DisplayName(
-    "if the user does not have can_be_payed role, a NotLoggedInException is thrown"
+    "When the user registers itself with the github login name, it is added to the 'registered' role"
   )
   void test() {
-    AuthenticatedUserStubs.authenticated(authenticatedUserService);
+    AuthenticatedUserStubs.canBePayed(authenticatedUserService);
+    assertEquals(
+        RoleEntityTestData.getNameRegistered(),
+        UserEntityTestData.getRoleRegistered().getRoles().iterator().next()
+    );
 
-    ThrowableTester.assertThrows(
-        () -> addToRoleController
-            .call(RegisterTestData.PROJECTNAME, RegisterTestData.PROJECTROLE)
-    ).assertException(UnauthorizedException.class);
   }
 
   @Test
   @DisplayName(
-    "if the user does not have can_be_payed role, a NotLoggedInException is thrown"
+    "if the user is registerd role, no exception is thrown"
   )
-  void test1() {
-    AuthenticatedUserStubs.authenticated(authenticatedUserService);
-
-    ThrowableTester.assertThrows(
-        () -> addToRoleController
-            .call(RegisterTestData.PROJECTNAME, RegisterTestData.PROJECTROLE)
-    ).assertMessageIs(AddToRoleControllerTestData.IN_ADD_TO_ROLE);
-  }
-
-  @Test
-  @DisplayName("if the user has can_be_played role, no exception is thrown")
   void test2() {
-
     AuthenticatedUserStubs.canBePayed(authenticatedUserService);
-
     ThrowableTester.assertNoException(
         () -> addToRoleController
             .call(RegisterTestData.PROJECTNAME, RegisterTestData.PROJECTROLE)
     );
+  }
+
+  @Test
+  @DisplayName(
+    "if the login is null, we throw unregistered exception"
+  )
+  void test3() {
+    AuthenticatedUserStubs.unregistered(authenticatedUserService);
+
+    ThrowableTester.assertThrows(
+        () -> addToRoleController
+            .call(RegisterTestData.PROJECTNAME, RegisterTestData.PROJECTROLE)
+    ).assertMessageIs(AddToRoleControllerTestData.UNREGISERED);
   }
 
 }

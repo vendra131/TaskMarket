@@ -25,10 +25,32 @@ public class AuthenticatedUserStubs {
         .call();
   }
 
+  public static void
+      project(final AuthenticatedUserService authenticatedUserService) {
+    doReturn(UserEntityTestData.getRoleProject())
+        .when(authenticatedUserService)
+        .call();
+  }
+
+  public static void
+      registered(final AuthenticatedUserService authenticatedUserService) {
+    doReturn(UserEntityTestData.getRoleRegistered())
+        .when(authenticatedUserService)
+        .call();
+  }
+
   public static void salesUser(
       final AuthenticatedUserService authenticatedUserService
   ) {
     doReturn(UserEntityTestData.getRoleSales()).when(authenticatedUserService)
         .call();
+  }
+
+  public static void
+      unregistered(final AuthenticatedUserService authenticatedUserService) {
+    doReturn(UserEntityTestData.getRoleUnregistered())
+        .when(authenticatedUserService)
+        .call();
+
   }
 }
