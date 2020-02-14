@@ -30,3 +30,5 @@ runapache
 taskmarket.zenta
 modelparts/metamodel/
 src/main/webapp/META-INF/
+MANIFEST.MF
+pom.properties
