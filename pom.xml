@@ -7,7 +7,7 @@
 	<groupId>org.rulez.demokracia</groupId>
 	<artifactId>TaskMarket</artifactId>
 	<version>0.0.1-feature_test.fc52c84</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>TaskMarket</name>
 	<description>process support for the Kode Konveyor process</description>
 	<url>http://github.com/kode-konveyor/TaskMarket</url>
@@ -17,6 +17,12 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.5.RELEASE</version>
 	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
+	
 
 	<licenses>
 		<license>
@@ -24,6 +30,7 @@
 			<url>All right reserved</url>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<name>Kode Konveyor OU</name>
@@ -37,13 +44,27 @@
 		<developerConnection>scm:git:ssh://github.com:kode-konveyor/TaskMarket.git</developerConnection>
 		<url>http://github.com/kode-konveyor/TaskMarket/tree/master</url>
 	</scm>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-	</properties>
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pre-integration-test</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -76,15 +97,15 @@
 				</dependencies>
 				<configuration>
 					<excludedClasses>
-					 <param>*DTO</param>
-					 <param>*Entity</param>
-					 <param>*Repository</param>
-					 <param>*Exception</param>
-					 <param>*Enum</param>
-					 <param>*Bean</param>
-					 <param>*.SpringConfig</param>
-					 <param>*.WebAppInitializer</param>
-					 <param>*.WebInitializer</param>
+						<param>*DTO</param>
+						<param>*Entity</param>
+						<param>*Repository</param>
+						<param>*Exception</param>
+						<param>*Enum</param>
+						<param>*Bean</param>
+						<param>*.SpringConfig</param>
+						<param>*.WebAppInitializer</param>
+						<param>*.WebInitializer</param>
 					</excludedClasses>
 					<targetTests>
 						<param>*Test*</param>
@@ -116,61 +137,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.4.23.v20191118</version>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopKey>foo</stopKey>
-					<stopPort>9999</stopPort>
-					<systemProperties>
-						<systemProperty>
-							<name>com.kodekonveyor.market.jdbcUri</name>
-							<value>jdbc:hsqldb:mem:market</value>
-						</systemProperty>
-					</systemProperties>
-					<systemProperty>
-						<name>com.kodekonveyor.market.jdbcDriver</name>
-						<value>org.hsqldb.jdbcDriver</value>
-					</systemProperty>
-					<webApp>
-						<contextPath>/market</contextPath>
-					</webApp>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.hsqldb</groupId>
-						<artifactId>hsqldb</artifactId>
-						<version>2.4.0</version>
-						<scope>runtime</scope>
-					</dependency>
-				</dependencies>
-
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
@@ -194,25 +160,12 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<goals>
-							<goal>set-system-properties</goal>
-						</goals>
 						<configuration>
-							<properties>
-								<property>
-									<name>com.kodekonveyor.market.jdbcUri</name>
-									<value>jdbc:hsqldb:mem:market</value>
-								</property>
-								<property>
-									<name>com.kodekonveyor.market.jdbcDriver</name>
-									<value>org.hsqldb.jdbcDriver</value>
-								</property>
-							</properties>
+							<mainClass>com.kodekonveyor.Application</mainClass>
 						</configuration>
 					</execution>
 				</executions>
@@ -345,6 +298,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<exclusions>
 				<exclusion>
@@ -382,6 +339,11 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.markusbernhardt</groupId>
@@ -427,11 +389,11 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -441,7 +403,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
@@ -455,7 +417,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			</dependency>
+		</dependency>
 	</dependencies>
 </project>
 
