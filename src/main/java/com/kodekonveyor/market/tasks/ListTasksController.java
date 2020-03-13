@@ -29,22 +29,23 @@ public class ListTasksController {
   public List<TaskDTO>
       call(final TaskStatusEnum status, final boolean... isPublic) {
     final UserEntity user = authenticatedUserService.call();
-
-    final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
     final Iterable<TaskEntity> tasks;
 
     if (isPublic.length > 0) {
       if (isPublic[0])
         tasks =
             taskRepository.findByStatusAndProjectIsPublic(status, isPublic[0]);
-      else
+      else {
+        final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
         tasks = taskRepository.findByStatusAndResponsibleAndProjectIsPublic(
             status, marketUserEntity, isPublic[0]
         );
-    } else
+      }
+    } else {
+      final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
       tasks =
           taskRepository.findByStatusAndResponsible(status, marketUserEntity);
-
+    }
     return convertTaskEntityToDTO(tasks);
   }
 
