@@ -38,42 +38,11 @@ public class ListTasksControllerListUsersTasksTest
   }
 
   @Test
-  @DisplayName("List In_Progress tasks where the user is responsible")
+  @DisplayName("List all the task for a user")
   public void test() {
     assertEquals(
-        TaskDTOTestData.getInProgressTasks(),
-        listTasksController.call(TaskStatusEnum.IN_PROGRESS)
-    );
-  }
-
-  @Test
-  @DisplayName(
-    "List Up_For_Grab tasks for closed projects the user is a member of"
-  )
-  public void test1() {
-    final boolean isPublic = false;
-    assertEquals(
-        TaskDTOTestData.getClosedUpForGrabTasks(),
-        listTasksController.call(TaskStatusEnum.UP_FOR_GRAB, isPublic)
-    );
-  }
-
-  @Test
-  @DisplayName("List Up_For_Grab tasks for open projects")
-  public void test2() {
-    final boolean isPublic = true;
-    assertEquals(
-        TaskDTOTestData.getOpenUpForGrabTasks(),
-        listTasksController.call(TaskStatusEnum.UP_FOR_GRAB, isPublic)
-    );
-  }
-
-  @Test
-  @DisplayName("List Closed tasks where the user is responsible")
-  public void test3() {
-    assertEquals(
-        TaskDTOTestData.getClosedTasks(),
-        listTasksController.call(TaskStatusEnum.DONE)
+        TaskDTOTestData.list(),
+        listTasksController.call()
     );
   }
 

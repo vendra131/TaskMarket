@@ -1,6 +1,5 @@
 package com.kodekonveyor.market.tasks;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kodekonveyor.market.project.ProjectEntityTestData;
@@ -17,37 +16,36 @@ public class TaskDTOTestData {
     return taskDTO;
   }
 
-  public static final List<TaskDTO> getClosedTasks() {
+  public static final TaskDTO getClosedTasks() {
     final TaskDTO taskDTO = get();
-    final List<TaskDTO> dtos = new ArrayList<>();
     taskDTO.setStatus(TaskStatusEnum.DONE);
-    dtos.add(taskDTO);
-    return dtos;
+    return taskDTO;
   }
 
-  public static final List<TaskDTO> getClosedUpForGrabTasks() {
+  public static final TaskDTO getClosedUpForGrabTasks() {
     final TaskDTO taskDTO = get();
-    final List<TaskDTO> dtos = new ArrayList<>();
     taskDTO.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     taskDTO.setProject(ProjectEntityTestData.getClosedProject());
-    dtos.add(taskDTO);
-    return dtos;
+    return taskDTO;
   }
 
-  public static final List<TaskDTO> getInProgressTasks() {
+  public static final TaskDTO getInProgressTasks() {
     final TaskDTO taskDTO = get();
-    final List<TaskDTO> dtos = new ArrayList<>();
     taskDTO.setStatus(TaskStatusEnum.IN_PROGRESS);
-    dtos.add(taskDTO);
-    return dtos;
+    return taskDTO;
   }
 
-  public static final List<TaskDTO> getOpenUpForGrabTasks() {
+  public static final TaskDTO getOpenUpForGrabTasks() {
     final TaskDTO taskDTO = get();
-    final List<TaskDTO> dtos = new ArrayList<>();
     taskDTO.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     taskDTO.setProject(ProjectEntityTestData.getOpenProject());
-    dtos.add(taskDTO);
-    return dtos;
+    return taskDTO;
+  }
+
+  public static List<TaskDTO> list() {
+    return List.of(
+        getInProgressTasks(), getClosedUpForGrabTasks(),
+        getOpenUpForGrabTasks(), getClosedTasks()
+    );
   }
 }

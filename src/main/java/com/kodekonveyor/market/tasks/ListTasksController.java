@@ -26,27 +26,34 @@ public class ListTasksController {
   TaskRepository taskRepository;
 
   @GetMapping(UrlMapConstants.LIST_TASK_PATH)
-  public List<TaskDTO>
-      call(final TaskStatusEnum status, final boolean... isPublic) {
+  public List<TaskDTO> call() {
     final UserEntity user = authenticatedUserService.call();
-    final Iterable<TaskEntity> tasks;
+    final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
+    final List<TaskDTO> ret = new ArrayList<>();
+    ret.addAll(
+        convertTaskEntityToDTO(
+            getInProgressOrClosedTask(
+                marketUserEntity, TaskStatusEnum.IN_PROGRESS
+            )
+        )
+    );
+    ret.addAll(
+        convertTaskEntityToDTO(
+            getClosedUpForGrabTask(marketUserEntity)
+        )
+    );
+    ret.addAll(
+        convertTaskEntityToDTO(
+            getOpenUpForGrabTask()
+        )
+    );
+    ret.addAll(
+        convertTaskEntityToDTO(
+            getInProgressOrClosedTask(marketUserEntity, TaskStatusEnum.DONE)
+        )
+    );
 
-    if (isPublic.length > 0) {
-      if (isPublic[0])
-        tasks =
-            taskRepository.findByStatusAndProjectIsPublic(status, isPublic[0]);
-      else {
-        final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
-        tasks = taskRepository.findByStatusAndResponsibleAndProjectIsPublic(
-            status, marketUserEntity, isPublic[0]
-        );
-      }
-    } else {
-      final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
-      tasks =
-          taskRepository.findByStatusAndResponsible(status, marketUserEntity);
-    }
-    return convertTaskEntityToDTO(tasks);
+    return ret;
   }
 
   private List<TaskDTO>
@@ -69,15 +76,34 @@ public class ListTasksController {
     return new TaskDTO();
   }
 
+  private Iterable<TaskEntity> getClosedUpForGrabTask(
+      final MarketUserEntity marketUserEntity
+  ) {
+    return taskRepository.findByStatusAndResponsibleAndProjectIsPublic(
+        TaskStatusEnum.UP_FOR_GRAB, marketUserEntity, false
+    );
+  }
+
+  private Iterable<TaskEntity> getInProgressOrClosedTask(
+      final MarketUserEntity marketUserEntity, final TaskStatusEnum status
+  ) {
+    return taskRepository.findByStatusAndResponsible(
+        status, marketUserEntity
+    );
+  }
+
   private MarketUserEntity getMarketUserEntity(final UserEntity user) {
     final List<MarketUserEntity> marketUserEntities =
         marketUserEntityRepository.findByLogin(user);
-
     MarketUserEntity entity = new MarketUserEntity();
     if (!marketUserEntities.isEmpty())
       entity = marketUserEntities.get(0);
-
     return entity;
+  }
+
+  private Iterable<TaskEntity> getOpenUpForGrabTask() {
+    return taskRepository
+        .findByStatusAndProjectIsPublic(TaskStatusEnum.UP_FOR_GRAB, true);
   }
 
 }
