@@ -11,13 +11,13 @@ public class ProjectEntityTestData {
     return entity;
   }
 
-  public static final ProjectEntity getClosedProject() {
+  public static final ProjectEntity getIspublicFalse() {
     final ProjectEntity entity = get();
     entity.setPublic(false);
     return entity;
   }
 
-  public static final ProjectEntity getOpenProject() {
+  public static final ProjectEntity getIsPublicTrue() {
     final ProjectEntity entity = get();
     entity.setPublic(true);
     return entity;

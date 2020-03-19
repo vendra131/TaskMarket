@@ -2,7 +2,6 @@ package com.kodekonveyor.market.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,18 +27,12 @@ public class ListTasksControllerListUsersTasksTest
 
   MarketUserDTOTestData registerTestData;
 
-  @Override
-  @BeforeEach
-  void setUp() {
-    super.setUp();
-    MarketUserStubs
-        .behaviour(marketUserEntityRepository, registerTestData);
-    AuthenticatedUserStubs.authenticated(authenticatedUserService);
-  }
-
   @Test
   @DisplayName("List all the task for a user")
   public void test() {
+    MarketUserStubs
+        .behaviour(marketUserEntityRepository, registerTestData);
+    AuthenticatedUserStubs.authenticated(authenticatedUserService);
     assertEquals(
         TaskDTOTestData.list(),
         listTasksController.call()

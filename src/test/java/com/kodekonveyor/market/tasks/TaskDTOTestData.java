@@ -16,36 +16,40 @@ public class TaskDTOTestData {
     return taskDTO;
   }
 
-  public static final TaskDTO getClosedTasks() {
+  public static final TaskDTO getIsPublicFalse() {
+    final TaskDTO taskDTO = getStatusUpForGrab();
+    taskDTO.setProject(ProjectEntityTestData.getIspublicFalse());
+    return taskDTO;
+  }
+
+  public static final TaskDTO getIsPublicTrue() {
+    final TaskDTO taskDTO = getStatusUpForGrab();
+    taskDTO.setProject(ProjectEntityTestData.getIsPublicTrue());
+    return taskDTO;
+  }
+
+  public static final TaskDTO getStatusDone() {
     final TaskDTO taskDTO = get();
     taskDTO.setStatus(TaskStatusEnum.DONE);
     return taskDTO;
   }
 
-  public static final TaskDTO getClosedUpForGrabTasks() {
-    final TaskDTO taskDTO = get();
-    taskDTO.setStatus(TaskStatusEnum.UP_FOR_GRAB);
-    taskDTO.setProject(ProjectEntityTestData.getClosedProject());
-    return taskDTO;
-  }
-
-  public static final TaskDTO getInProgressTasks() {
+  public static final TaskDTO getStatusInProgress() {
     final TaskDTO taskDTO = get();
     taskDTO.setStatus(TaskStatusEnum.IN_PROGRESS);
     return taskDTO;
   }
 
-  public static final TaskDTO getOpenUpForGrabTasks() {
+  public static final TaskDTO getStatusUpForGrab() {
     final TaskDTO taskDTO = get();
     taskDTO.setStatus(TaskStatusEnum.UP_FOR_GRAB);
-    taskDTO.setProject(ProjectEntityTestData.getOpenProject());
     return taskDTO;
   }
 
   public static List<TaskDTO> list() {
     return List.of(
-        getInProgressTasks(), getClosedUpForGrabTasks(),
-        getOpenUpForGrabTasks(), getClosedTasks()
+        getStatusInProgress(), getIsPublicFalse(),
+        getIsPublicTrue(), getStatusDone()
     );
   }
 }

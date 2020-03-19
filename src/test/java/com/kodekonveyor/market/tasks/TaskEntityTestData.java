@@ -19,8 +19,15 @@ public class TaskEntityTestData {
     taskEntity.setResponsible(MarketUserEntityTestData.get());
     return taskEntity;
   }
+  
+  public static final TaskEntity getStatusUpFprGrab() {
+    final TaskEntity taskEntity = get();
+    taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
+    return taskEntity;
+  }
+  
 
-  public static final List<TaskEntity> getClosedTasks() {
+  public static final List<TaskEntity> listStatusDone() {
     final TaskEntity taskEntity = get();
     final List<TaskEntity> taskEntities = new ArrayList<>();
     taskEntity.setStatus(TaskStatusEnum.DONE);
@@ -28,16 +35,7 @@ public class TaskEntityTestData {
     return taskEntities;
   }
 
-  public static final List<TaskEntity> getClosedUpForGrabTasks() {
-    final TaskEntity taskEntity = get();
-    final List<TaskEntity> taskEntities = new ArrayList<>();
-    taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
-    taskEntity.setProject(ProjectEntityTestData.getClosedProject());
-    taskEntities.add(taskEntity);
-    return taskEntities;
-  }
-
-  public static final List<TaskEntity> getInProgressTasks() {
+  public static final List<TaskEntity> listStatusInProgress() {
     final TaskEntity taskEntity = get();
     final List<TaskEntity> taskEntities = new ArrayList<>();
     taskEntity.setStatus(TaskStatusEnum.IN_PROGRESS);
@@ -45,12 +43,22 @@ public class TaskEntityTestData {
     return taskEntities;
   }
 
-  public static final List<TaskEntity> getOpenUpForGrabTasks() {
-    final TaskEntity taskEntity = get();
+  public static final List<TaskEntity> listIsPublicTrue() {
+    final TaskEntity taskEntity = getStatusUpFprGrab();
     final List<TaskEntity> taskEntities = new ArrayList<>();
     taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
-    taskEntity.setProject(ProjectEntityTestData.getOpenProject());
+    taskEntity.setProject(ProjectEntityTestData.getIsPublicTrue());
     taskEntities.add(taskEntity);
     return taskEntities;
   }
+
+  public static final List<TaskEntity> listIsPublicFalse() {
+    final TaskEntity taskEntity = getStatusUpFprGrab();
+    final List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
+    taskEntity.setProject(ProjectEntityTestData.getIspublicFalse());
+    taskEntities.add(taskEntity);
+    return taskEntities;
+  }
+
 }
