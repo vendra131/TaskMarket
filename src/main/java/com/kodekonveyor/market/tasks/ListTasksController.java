@@ -28,7 +28,11 @@ public class ListTasksController {
   @GetMapping(UrlMapConstants.LIST_TASK_PATH)
   public List<TaskDTO> call() {
     final UserEntity user = authenticatedUserService.call();
-    final MarketUserEntity marketUserEntity = getMarketUserEntity(user);
+    final List<MarketUserEntity> marketUserEntities =
+        marketUserEntityRepository.findByLogin(user);
+    MarketUserEntity marketUserEntity = new MarketUserEntity();
+    if (!marketUserEntities.isEmpty())
+      marketUserEntity = marketUserEntities.get(0);
     final List<TaskDTO> ret = new ArrayList<>();
     ret.addAll(
         convertTaskEntityToDTO(
@@ -90,15 +94,6 @@ public class ListTasksController {
     return taskRepository.findByStatusAndResponsible(
         status, marketUserEntity
     );
-  }
-
-  private MarketUserEntity getMarketUserEntity(final UserEntity user) {
-    final List<MarketUserEntity> marketUserEntities =
-        marketUserEntityRepository.findByLogin(user);
-    MarketUserEntity entity = new MarketUserEntity();
-    if (!marketUserEntities.isEmpty())
-      entity = marketUserEntities.get(0);
-    return entity;
   }
 
   private Iterable<TaskEntity> getOpenUpForGrabTask() {
