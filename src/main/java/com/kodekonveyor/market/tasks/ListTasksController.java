@@ -33,7 +33,7 @@ public class ListTasksController {
     MarketUserEntity marketUserEntity = new MarketUserEntity();
     if (!marketUserEntities.isEmpty())
       marketUserEntity = marketUserEntities.get(0);
-    final List<TaskDTO> ret = List
+    return List
         .of(
             getInProgressOrClosedTask(
                 marketUserEntity, TaskStatusEnum.IN_PROGRESS
@@ -43,7 +43,6 @@ public class ListTasksController {
             getInProgressOrClosedTask(marketUserEntity, TaskStatusEnum.DONE)
         ).stream()
         .flatMap(List::stream).map(this::convertTaskEntityToDTO).collect(Collectors.toList());
-    return ret;
   }
 
   private TaskDTO
