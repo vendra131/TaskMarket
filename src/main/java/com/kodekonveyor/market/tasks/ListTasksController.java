@@ -1,7 +1,7 @@
 package com.kodekonveyor.market.tasks;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,54 +33,35 @@ public class ListTasksController {
     MarketUserEntity marketUserEntity = new MarketUserEntity();
     if (!marketUserEntities.isEmpty())
       marketUserEntity = marketUserEntities.get(0);
-    final List<TaskDTO> ret = new ArrayList<>();
-    ret.addAll(
-        convertTaskEntityToDTO(
+    final List<TaskDTO> ret = List
+        .of(
             getInProgressOrClosedTask(
                 marketUserEntity, TaskStatusEnum.IN_PROGRESS
-            )
-        )
-    );
-    ret.addAll(
-        convertTaskEntityToDTO(
-            getClosedUpForGrabTask(marketUserEntity)
-        )
-    );
-    ret.addAll(
-        convertTaskEntityToDTO(
-            getOpenUpForGrabTask()
-        )
-    );
-    ret.addAll(
-        convertTaskEntityToDTO(
+            ),
+            getClosedUpForGrabTask(marketUserEntity),
+            getOpenUpForGrabTask(),
             getInProgressOrClosedTask(marketUserEntity, TaskStatusEnum.DONE)
-        )
-    );
-
+        ).stream()
+        .flatMap(List::stream).map(this::convertTaskEntityToDTO).collect(Collectors.toList());
     return ret;
   }
 
-  private List<TaskDTO>
-      convertTaskEntityToDTO(final Iterable<TaskEntity> taIterable) {
-
-    final List<TaskDTO> ret = new ArrayList<>();
-    for (final TaskEntity taskEntity : taIterable) {
-      final TaskDTO taskDTO = createTaskDTO();
-      taskDTO.setGithubId(taskEntity.getGithubId());
-      taskDTO.setName(taskEntity.getName());
-      taskDTO.setProject(taskEntity.getProject());
-      taskDTO.setResponsible(taskEntity.getResponsible());
-      taskDTO.setStatus(taskEntity.getStatus());
-      ret.add(taskDTO);
-    }
-    return ret;
+  private TaskDTO
+      convertTaskEntityToDTO(final TaskEntity taskEntity) {
+    final TaskDTO taskDTO = createTaskDTO();
+    taskDTO.setGithubId(taskEntity.getGithubId());
+    taskDTO.setName(taskEntity.getName());
+    taskDTO.setProject(taskEntity.getProject());
+    taskDTO.setResponsible(taskEntity.getResponsible());
+    taskDTO.setStatus(taskEntity.getStatus());
+    return taskDTO;
   }
 
   private TaskDTO createTaskDTO() {
     return new TaskDTO();
   }
 
-  private Iterable<TaskEntity> getClosedUpForGrabTask(
+  private List<TaskEntity> getClosedUpForGrabTask(
       final MarketUserEntity marketUserEntity
   ) {
     return taskRepository.findByStatusAndResponsibleAndProjectIsPublic(
@@ -88,7 +69,7 @@ public class ListTasksController {
     );
   }
 
-  private Iterable<TaskEntity> getInProgressOrClosedTask(
+  private List<TaskEntity> getInProgressOrClosedTask(
       final MarketUserEntity marketUserEntity, final TaskStatusEnum status
   ) {
     return taskRepository.findByStatusAndResponsible(
@@ -96,7 +77,7 @@ public class ListTasksController {
     );
   }
 
-  private Iterable<TaskEntity> getOpenUpForGrabTask() {
+  private List<TaskEntity> getOpenUpForGrabTask() {
     return taskRepository
         .findByStatusAndProjectIsPublic(TaskStatusEnum.UP_FOR_GRAB, true);
   }
