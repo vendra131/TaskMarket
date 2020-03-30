@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.kodekonveyor.annotations.ExcludeFromCodeCoverage;
 import com.kodekonveyor.market.LogSeverityEnum;
 import com.kodekonveyor.market.LoggerService;
+import com.kodekonveyor.market.SpringConfig;
 import com.kodekonveyor.market.proxies.ObjectMapperService;
 
 @Service
@@ -23,6 +31,29 @@ public class GithubGetService {
 
   @Autowired
   private ObjectMapperService objectMapperProxy;
+
+  public JsonResult call(final String url) {
+
+    try {
+      final HttpClient client = HttpClients.custom().build();
+      final HttpUriRequest request = RequestBuilder.get()
+          .setUri(url)
+          .setHeader(
+              HttpHeaders.AUTHORIZATION, "token " + SpringConfig.issuetoken
+          )
+          .build();
+      final HttpResponse response = client.execute(request);
+      final JsonResult jsonResult = new JsonResult();
+      jsonResult.setResult(EntityUtils.toString(response.getEntity(), "UTF-8"));
+      return jsonResult;
+
+    } catch (final IOException exception) {
+      throw new ResponseStatusException(
+          HttpStatus.INTERNAL_SERVER_ERROR,
+          GithubConstants.INTERNAL_ERROR, exception
+      );
+    }
+  }
 
   public <ValueType> ValueType
       call(final String command, final Class<ValueType> cls) {
@@ -49,5 +80,4 @@ public class GithubGetService {
     }
     return value;
   }
-
 }

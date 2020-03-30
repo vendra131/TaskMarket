@@ -33,16 +33,14 @@ import com.kodekonveyor.annotations.InterfaceClass;
 @ExcludeFromCodeCoverage("interface to underlaying framework")
 public class SpringConfig implements WebMvcConfigurer {
 
-  @Value("${com.kodekonveyor.market.jdbcUri}")
-  private String jdbcUri;
+  public static final String issuetoken =
+      "fbddcf8e632c5da4cbda9f44db466940aebc0566";
 
   @Value("${com.kodekonveyor.market.jdbcDriver}")
   private String jdbcDriver;
 
-  @Bean
-  public ModelMapper modelMapper() {
-    return new ModelMapper();
-  }
+  @Value("${com.kodekonveyor.market.jdbcUri}")
+  private String jdbcUri;
 
   @Bean
   public DataSource dataSource() {
@@ -52,4 +50,8 @@ public class SpringConfig implements WebMvcConfigurer {
     return dataSourceBuilder.build();
   }
 
+  @Bean
+  public ModelMapper modelMapper() {
+    return new ModelMapper();
+  }
 }
