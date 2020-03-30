@@ -19,12 +19,12 @@ class SeleniumTestHelper {
     driver = new FirefoxDriver(firefoxOptions);
   }
 
-  public static void close() {
-    driver.close();
-  }
-
   public static FirefoxDriver getDriver() {
     return driver;
+  }
+
+  public static void close() {
+    driver.close();
   }
 
   public static WebElement waitFor(final String cssSelector) {
