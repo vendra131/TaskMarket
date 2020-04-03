@@ -36,7 +36,7 @@ public class GithubGetServiceUseGithubApiTest extends GithubGetServiceTestBase {
   void test() {
     try {
       assertEquals(
-          githubGetService.call(JsonResultTestData.GITHUB_API_URL).getResult(), JsonResultTestData.get().getResult()
+          githubGetService.call(JsonResultTestData.GITHUB_API_URL), JsonResultTestData.get()
       );
     } catch (final IOException exception) {
       loggerService.error(

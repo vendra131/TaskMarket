@@ -32,7 +32,7 @@ public class GithubGetService {
   @Autowired
   private ObjectMapperService objectMapperProxy;
 
-  public JsonResult call(final String url) {
+  public JsonResultDTO call(final String url) {
 
     try {
       final HttpClient client = HttpClients.custom().build();
@@ -43,7 +43,7 @@ public class GithubGetService {
           )
           .build();
       final HttpResponse response = client.execute(request);
-      final JsonResult jsonResult = new JsonResult();
+      final JsonResultDTO jsonResult = new JsonResultDTO();
       jsonResult.setResult(
           EntityUtils.toString(response.getEntity(), GithubConstants.UTF_8)
       );
