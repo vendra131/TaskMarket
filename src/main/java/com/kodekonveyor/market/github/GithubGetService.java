@@ -3,10 +3,9 @@ package com.kodekonveyor.market.github;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpResponse;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.kodekonveyor.annotations.ExcludeFromCodeCoverage;
-import com.kodekonveyor.market.LogSeverityEnum;
-import com.kodekonveyor.market.LoggerService;
+import com.kodekonveyor.logging.LoggingMarkerConstants;
 import com.kodekonveyor.market.SpringConfig;
 import com.kodekonveyor.market.proxies.ObjectMapperService;
 
@@ -27,7 +25,7 @@ import com.kodekonveyor.market.proxies.ObjectMapperService;
 public class GithubGetService {
 
   @Autowired
-  private LoggerService loggerService;
+  private Logger loggerService;
 
   @Autowired
   private ObjectMapperService objectMapperProxy;
@@ -58,7 +56,7 @@ public class GithubGetService {
   public <ValueType> ValueType
       call(final String command, final Class<ValueType> cls) {
     final String uri = GithubConstants.GITHUB_API_URL_BASE + command;
-    loggerService.call(GithubConstants.GITHUB_CALL, LogSeverityEnum.DEBUG, uri);
+    loggerService.debug(LoggingMarkerConstants.GITHUB, uri);
     URL url;
     try {
       url = new URL(uri);
