@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
 
+import com.kodekonveyor.market.github.GithubConstants;
 import com.kodekonveyor.market.github.JsonResult;
 
 public class JsonResultTestData {
@@ -19,9 +20,9 @@ public class JsonResultTestData {
 
   public static final String getGithubResponse() throws IOException {
     return IOUtils.toString(
-       Thread.currentThread().getContextClassLoader()
-            .getResource("github_api_response.json"),
-        "UTF-8"
+        Thread.currentThread().getContextClassLoader()
+            .getResource(GithubConstants.FILE_NAME),
+        GithubConstants.UTF_8
     );
   }
 }

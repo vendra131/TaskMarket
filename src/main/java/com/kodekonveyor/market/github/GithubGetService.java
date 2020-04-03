@@ -3,21 +3,23 @@ package com.kodekonveyor.market.github;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.http.HttpHeaders;
-import java.net.http.HttpResponse;
 
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.kodekonveyor.SpringConfig;
 import com.kodekonveyor.annotations.ExcludeFromCodeCoverage;
 import com.kodekonveyor.logging.LoggingMarkerConstants;
-import com.kodekonveyor.market.SpringConfig;
 import com.kodekonveyor.market.proxies.ObjectMapperService;
 
 @Service
@@ -37,12 +39,14 @@ public class GithubGetService {
       final HttpUriRequest request = RequestBuilder.get()
           .setUri(url)
           .setHeader(
-              HttpHeaders.AUTHORIZATION, "token " + SpringConfig.issuetoken
+              HttpHeaders.AUTHORIZATION, SpringConfig.issuetoken
           )
           .build();
       final HttpResponse response = client.execute(request);
       final JsonResult jsonResult = new JsonResult();
-      jsonResult.setResult(EntityUtils.toString(response.getEntity(), "UTF-8"));
+      jsonResult.setResult(
+          EntityUtils.toString(response.getEntity(), GithubConstants.UTF_8)
+      );
       return jsonResult;
 
     } catch (final IOException exception) {

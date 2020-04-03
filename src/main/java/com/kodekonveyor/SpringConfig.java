@@ -35,6 +35,9 @@ public class SpringConfig extends SpringBootServletInitializer {
   @Value("${com.kodekonveyor.market.jdbcDriver}")
   private String jdbcDriver;
 
+  public static final String issuetoken =
+      "token fbddcf8e632c5da4cbda9f44db466940aebc0566";
+
   public static void main(final String[] args) {
     SpringApplication.run(SpringConfig.class, args);
   }

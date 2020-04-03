@@ -12,13 +12,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.market.LogSeverityEnum;
-import com.kodekonveyor.market.LoggerService;
-import com.kodekonveyor.market.github.GithubConstants;
+import com.kodekonveyor.logging.LoggingMarkerConstants;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -28,7 +27,7 @@ import com.kodekonveyor.market.github.GithubConstants;
 public class GithubGetServiceUseGithubApiTest extends GithubGetServiceTestBase {
 
   @Autowired
-  LoggerService loggerService;
+  Logger loggerService;
 
   @Test
   @DisplayName(
@@ -40,9 +39,8 @@ public class GithubGetServiceUseGithubApiTest extends GithubGetServiceTestBase {
           githubGetService.call(JsonResultTestData.GITHUB_API_URL), JsonResultTestData.get()
       );
     } catch (final IOException exception) {
-      loggerService.call(
-          GithubConstants.INTERNAL_ERROR, LogSeverityEnum.ERROR,
-          JsonResultTestData.GITHUB_API_URL
+      loggerService.error(
+          LoggingMarkerConstants.GITHUB, JsonResultTestData.GITHUB_API_URL
       );
     }
 
