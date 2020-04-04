@@ -4635,11 +4635,6 @@ RemoteAuthentication is an Authentication implementation
                    id="9572f5f6-5c96-48e6-b463-c920ca71b819"
                    zentaElement="bd491eca-1d0f-4768-8de7-bbc4442d2a3f">
                <bounds x="451" y="118" width="201"/>
-               <sourceConnection xsi:type="zenta:Connection"
-                                 id="5863d13f-8fe8-44a3-9a80-d6784d7ae3a3"
-                                 source="9572f5f6-5c96-48e6-b463-c920ca71b819"
-                                 target="63c0f8fa-53c9-450b-8f29-6217f9c16688"
-                                 relationship="773e908e-5249-4c9e-ba03-99e4b01d2a98"/>
             </child>
             <child xsi:type="zenta:DiagramObject"
                    id="3771536a-eeab-401b-b944-64c1b5e373c3"
@@ -4867,10 +4862,11 @@ RemoteAuthentication is an Authentication implementation
                   ancestor="7a26a9a0-0603-4f53-93d2-f09fd0519e2b"
                   source="6510547d-b1b5-4624-a270-e8433d6c424d"
                   target="6cd2b009-714f-485d-ae14-6b2e081daf18"/>
-         <element xsi:type="zenta:BasicObject"
-                  name="org.slf4j.Marker"
-                  id="01bf803f-bd6a-43cb-991a-fd38555a72d2"
-                  ancestor="36ff5aca-f5cf-4e04-8d74-39cbb035cc2d"/>
+         <element xsi:type="zenta:BasicRelationship"
+                  id="8337d62e-50f1-4718-b654-e3f59d4a82ad"
+                  ancestor="e3ad9158-0def-47d6-a531-196ad3733004"
+                  source="d134c54d-d391-4920-993b-8531e7f12825"
+                  target="562506d7-6287-43dd-a9ab-daeca22851d5"/>
          <element xsi:type="zenta:BasicRelationship"
                   id="ef8b89e3-83f7-4d78-837e-ec2ac6b65141"
                   ancestor="7a26a9a0-0603-4f53-93d2-f09fd0519e2b"
@@ -4881,11 +4877,15 @@ RemoteAuthentication is an Authentication implementation
                   ancestor="e3ad9158-0def-47d6-a531-196ad3733004"
                   source="d134c54d-d391-4920-993b-8531e7f12825"
                   target="01bf803f-bd6a-43cb-991a-fd38555a72d2"/>
+         <element xsi:type="zenta:BasicObject"
+                  name="org.slf4j.Marker"
+                  id="01bf803f-bd6a-43cb-991a-fd38555a72d2"
+                  ancestor="36ff5aca-f5cf-4e04-8d74-39cbb035cc2d"/>
          <element xsi:type="zenta:BasicRelationship"
-                  id="8337d62e-50f1-4718-b654-e3f59d4a82ad"
-                  ancestor="e3ad9158-0def-47d6-a531-196ad3733004"
-                  source="d134c54d-d391-4920-993b-8531e7f12825"
-                  target="562506d7-6287-43dd-a9ab-daeca22851d5"/>
+                  id="3ec113c6-83ad-4331-b548-24a092f72274"
+                  ancestor="a99c1f63-c4f6-4d0a-b9e8-5bf3aa5284a2"
+                  source="eabd00f6-b0e8-48f1-a368-9e4ae49b2212"
+                  target="d134c54d-d391-4920-993b-8531e7f12825"/>
          <element xsi:type="zenta:BasicRelationship"
                   id="d3053039-1609-47aa-8263-0ca3161ed7da"
                   ancestor="e3ad9158-0def-47d6-a531-196ad3733004"
@@ -4901,11 +4901,6 @@ RemoteAuthentication is an Authentication implementation
                   ancestor="a99c1f63-c4f6-4d0a-b9e8-5bf3aa5284a2"
                   source="eabd00f6-b0e8-48f1-a368-9e4ae49b2212"
                   target="e1b87b3d-66dc-4c93-bcfb-b3a1ba1d1ecc"/>
-         <element xsi:type="zenta:BasicRelationship"
-                  id="3ec113c6-83ad-4331-b548-24a092f72274"
-                  ancestor="a99c1f63-c4f6-4d0a-b9e8-5bf3aa5284a2"
-                  source="eabd00f6-b0e8-48f1-a368-9e4ae49b2212"
-                  target="d134c54d-d391-4920-993b-8531e7f12825"/>
          <element xsi:type="zenta:BasicObject"
                   name="USER_NAME_AND_PROJECT_ID"
                   id="70ba3cca-c8c3-46ac-b2de-5439b7b0d6be"
@@ -6425,10 +6420,9 @@ RemoteAuthentication is an Authentication implementation
                source="e1b87b3d-66dc-4c93-bcfb-b3a1ba1d1ecc"
                target="b0b9e3d0-389f-4989-941a-e97aeb77bdbc"/>
       <element xsi:type="zenta:BasicRelationship"
-               id="773e908e-5249-4c9e-ba03-99e4b01d2a98"
-               ancestor="bbe8d388-6c76-4351-8e81-83f144f7bc9e"
-               source="bd491eca-1d0f-4768-8de7-bbc4442d2a3f"
-               target="9255b3fb-1ea3-400b-b184-bd3d2a8ec749"/>
+               id="9fcc4480-5cf4-4196-ba21-f7026a525155"
+               ancestor="a66389d6-4758-45da-8d36-a802bdc6a0c9"
+               target="1124b427-dbfc-4608-ba33-439b700ed156"/>
       <element xsi:type="zenta:BasicRelationship"
                id="48e680fb-a5cd-4501-994d-f7ca1e829fe4"
                ancestor="7bbba479-c1ed-445b-915d-25d3eb478b1f"
@@ -9874,6 +9868,10 @@ See https://stackoverflow.com/questions/3891375/how-to-read-a-text-file-resource
                            source="49c732b4-ee9b-4fce-9046-dfcc1ce38810"
                            target="b270cbfb-d62c-49ff-b777-25817ae6a4c4"
                            relationship="a18332c3-4f8e-46f0-8c2d-6ff4e623ac30"/>
+         <sourceConnection xsi:type="zenta:Connection"
+                           id="4f8f20ce-7236-42b4-bfaf-1182947e04fd"
+                           source="49c732b4-ee9b-4fce-9046-dfcc1ce38810"
+                           target="a8a229a7-588e-4581-b836-e88130f5dfed"/>
          <sourceConnection xsi:type="zenta:Connection"
                            id="1f4e5e2b-9ace-42a9-8e11-8be2749373d1"
                            source="49c732b4-ee9b-4fce-9046-dfcc1ce38810"
