@@ -9859,10 +9859,6 @@ See https://stackoverflow.com/questions/3891375/how-to-read-a-text-file-resource
                            target="b270cbfb-d62c-49ff-b777-25817ae6a4c4"
                            relationship="a18332c3-4f8e-46f0-8c2d-6ff4e623ac30"/>
          <sourceConnection xsi:type="zenta:Connection"
-                           id="4f8f20ce-7236-42b4-bfaf-1182947e04fd"
-                           source="49c732b4-ee9b-4fce-9046-dfcc1ce38810"
-                           target="a8a229a7-588e-4581-b836-e88130f5dfed"/>
-         <sourceConnection xsi:type="zenta:Connection"
                            id="1f4e5e2b-9ace-42a9-8e11-8be2749373d1"
                            source="49c732b4-ee9b-4fce-9046-dfcc1ce38810"
                            target="e2d3b4fc-b8c4-4933-9fe9-a72b8e58aab0"
