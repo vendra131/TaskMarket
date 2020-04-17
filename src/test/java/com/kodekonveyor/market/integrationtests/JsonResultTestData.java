@@ -1,9 +1,10 @@
-package com.kodekonveyor.technical;
+package com.kodekonveyor.market.integrationtests;
 
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
 
+import com.kodekonveyor.market.github.FileNotFoundException;
 import com.kodekonveyor.market.github.GithubConstants;
 import com.kodekonveyor.market.github.JsonResultDTO;
 
@@ -18,11 +19,17 @@ public class JsonResultTestData {
     return jsonResult;
   }
 
-  public static final String getGithubResponse() throws IOException {
-    return IOUtils.toString(
-        Thread.currentThread().getContextClassLoader()
-            .getResource(GithubConstants.FILE_NAME),
-        GithubConstants.UTF_8
-    );
+  public static final String getGithubResponse() {
+    String resp;
+    try {
+      resp = IOUtils.toString(
+          Thread.currentThread().getContextClassLoader()
+              .getResource(GithubConstants.FILE_NAME),
+          GithubConstants.UTF_8
+      );
+    } catch (final IOException exception) {
+      throw new FileNotFoundException(GithubConstants.FILE_NOT_FOUND);
+    }
+    return resp;
   }
 }

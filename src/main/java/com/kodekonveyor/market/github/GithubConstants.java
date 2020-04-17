@@ -9,5 +9,7 @@ public class GithubConstants {
   public static final String INTERNAL_ERROR = "internal error";
   public static final String FILE_NAME = "github_api_response.json";
   public static final String UTF_8 = "UTF-8";
+  public static final String FILE_NOT_FOUND =
+      "Github api response file not found";
 
 }

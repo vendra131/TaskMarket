@@ -1,4 +1,4 @@
-package com.kodekonveyor.technical;
+package com.kodekonveyor.market.integrationtests;
 
 import org.mockito.InjectMocks;
 
