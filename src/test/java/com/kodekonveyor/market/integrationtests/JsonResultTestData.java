@@ -28,7 +28,9 @@ public class JsonResultTestData {
           GithubConstants.UTF_8
       );
     } catch (final IOException exception) {
-      throw new FileNotFoundException(GithubConstants.FILE_NOT_FOUND);
+      throw new FileNotFoundException(
+          GithubConstants.FILE_NOT_FOUND, exception
+      );
     }
     return resp;
   }
