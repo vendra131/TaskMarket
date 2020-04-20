@@ -128,6 +128,10 @@
 							<name>com.kodekonveyor.market.jdbcUri</name>
 							<value>jdbc:hsqldb:mem:market</value>
 						</systemProperty>
+						<systemProperty>
+							<name>com.kodekonveyor.market.issuetoken</name>
+							<value>${env.com.kodekonveyor.market.issuetoken}</value>
+						</systemProperty>
 					</systemProperties>
 					<systemProperty>
 						<name>com.kodekonveyor.market.jdbcDriver</name>
