@@ -50,8 +50,8 @@ public class ListTasksController {
     final TaskDTO taskDTO = createTaskDTO();
     taskDTO.setGithubId(taskEntity.getGithubId());
     taskDTO.setName(taskEntity.getName());
-    taskDTO.setProject(taskEntity.getProject());
-    taskDTO.setResponsible(taskEntity.getResponsible());
+    taskDTO.setProject(taskEntity.getProject().getName());
+    taskDTO.setResponsible(taskEntity.getResponsible().getLogin().getLogin());
     taskDTO.setStatus(taskEntity.getStatus());
     return taskDTO;
   }
