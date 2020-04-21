@@ -25,7 +25,7 @@ import com.kodekonveyor.exception.ThrowableTester;
 @TestPropertySource(locations = "classpath:test.properties")
 @Testable
 @Tag("IntegrationTest")
-public class GithubGetServiceUseGithubApiTest extends GithubGetServiceTestBase {
+public class GithubGetServiceUseGithubApiIT extends GithubGetServiceTestBase {
 
   @Autowired
   Logger loggerService;
