@@ -67,5 +67,4 @@ public class TaskEntityTestData {
     taskEntities.add(taskEntity);
     return taskEntities;
   }
-
 }

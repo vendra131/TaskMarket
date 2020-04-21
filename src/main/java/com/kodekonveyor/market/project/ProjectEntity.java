@@ -14,9 +14,8 @@ public class ProjectEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-
   private boolean isPublic;
-
+  private String milestones;
   private String name;
 
 }

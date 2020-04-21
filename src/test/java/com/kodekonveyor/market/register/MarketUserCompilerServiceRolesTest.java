@@ -12,43 +12,39 @@ import org.mockito.quality.Strictness;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.UserEntityTestData;
 import com.kodekonveyor.exception.ThrowableTester;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @RunWith(MockitoJUnitRunner.class)
 @TestedBehaviour("roles")
-@TestedService("PaymentUpdateController")
-public class PaymentUpdateControllerRolesTest
-    extends PaymentUpdateControllerTestBase {
-
-  MarketUserDTOTestData registerTestData;
+@TestedService("UpdateTasksController")
+public class MarketUserCompilerServiceRolesTest
+    extends MarketUserCompilerServiceTestBase {
 
   @Test
   @DisplayName(
-    "if the user does not have kodekonveyor_contract role, an Exception is thrown"
+    "if the user does not have registered role, an Exception is thrown"
   )
   void test() {
     AuthenticatedUserStubs.canBePayed(authenticatedUserService);
     ThrowableTester.assertThrows(
-        () -> paymentUpdateController.call(RegisterTestData.PAYMENT_DETAILS)
+        () -> marketUserCompilerService.call(UserEntityTestData.ID)
     ).assertMessageIs(
-        PaymentUpdateControllerTestData.UNAUTHORIZED_NOT_ENOUGH_RIGHTS
+        RegisterConstants.UNAUTHORIZED_NOT_ENOUGH_RIGHTS
     );
-
   }
 
   @Test
   @DisplayName(
-    "if the user havs kodekonveyor_contract role, no Exception is thrown"
+    "if the user havs registered role, no Exception is thrown"
   )
-  void test2() {
-    AuthenticatedUserStubs.kodekonveyorContract(authenticatedUserService);
-    MarketUserStubs
-        .contractTermsAccepted(marketUserEntityRepository, registerTestData);
+  void test1() {
+    AuthenticatedUserStubs.registered(authenticatedUserService);
     ThrowableTester.assertNoException(
-        () -> paymentUpdateController.call(RegisterTestData.PAYMENT_DETAILS)
+        () -> marketUserCompilerService.call(UserEntityTestData.ID)
     );
-
   }
+
 }
