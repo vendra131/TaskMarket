@@ -129,8 +129,8 @@
 							<value>jdbc:hsqldb:mem:market</value>
 						</systemProperty>
 						<systemProperty>
-							<name>com.kodekonveyor.market.issuetoken</name>
-							<value>${env.com.kodekonveyor.market.issuetoken}</value>
+							<name>issuetoken</name>
+							<value>${env.issuetoken}</value>
 						</systemProperty>
 					</systemProperties>
 					<systemProperty>

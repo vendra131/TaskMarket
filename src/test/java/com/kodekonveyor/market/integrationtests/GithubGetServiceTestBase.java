@@ -1,11 +1,11 @@
 package com.kodekonveyor.market.integrationtests;
 
-import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kodekonveyor.market.github.GithubGetService;
 
 public class GithubGetServiceTestBase {
 
-  @InjectMocks
+  @Autowired
   GithubGetService githubGetService;
 }

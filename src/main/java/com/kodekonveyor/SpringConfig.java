@@ -37,7 +37,7 @@ public class SpringConfig extends SpringBootServletInitializer {
 
   public static String issuetoken;
 
-  @Value("${com.kodekonveyor.market.issuetoken}")
+  @Value("${issuetoken}")
   public void setIssuetoken(final String issueToken) {
     issuetoken = issueToken;
   }
