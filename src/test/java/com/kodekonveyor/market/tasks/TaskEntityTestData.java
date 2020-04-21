@@ -9,6 +9,10 @@ import com.kodekonveyor.market.register.MarketUserEntityTestData;
 public class TaskEntityTestData {
 
   public static final String ISSUE_ID = "1234";
+  public static final String ISSUE_ID_INPROGRESS = "4567";
+  public static final String ISSUE_ID_UPFORGRAB_OPEN = "5897";
+  public static final String ISSUE_ID_UPFORGRAB_CLOSED = "5997";
+  public static final String ISSUE_ID_CLOSED = "9897";
   public static final String ISSUE_NAME = "xyz";
 
   public static final TaskEntity get() {
@@ -19,17 +23,17 @@ public class TaskEntityTestData {
     taskEntity.setResponsible(MarketUserEntityTestData.get());
     return taskEntity;
   }
-  
+
   public static final TaskEntity getStatusUpFprGrab() {
     final TaskEntity taskEntity = get();
     taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     return taskEntity;
   }
-  
 
   public static final List<TaskEntity> listStatusDone() {
     final TaskEntity taskEntity = get();
     final List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntity.setGithubId(ISSUE_ID_CLOSED);
     taskEntity.setStatus(TaskStatusEnum.DONE);
     taskEntities.add(taskEntity);
     return taskEntities;
@@ -38,6 +42,7 @@ public class TaskEntityTestData {
   public static final List<TaskEntity> listStatusInProgress() {
     final TaskEntity taskEntity = get();
     final List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntity.setGithubId(ISSUE_ID_INPROGRESS);
     taskEntity.setStatus(TaskStatusEnum.IN_PROGRESS);
     taskEntities.add(taskEntity);
     return taskEntities;
@@ -46,6 +51,7 @@ public class TaskEntityTestData {
   public static final List<TaskEntity> listIsPublicTrue() {
     final TaskEntity taskEntity = getStatusUpFprGrab();
     final List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntity.setGithubId(ISSUE_ID_UPFORGRAB_OPEN);
     taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     taskEntity.setProject(ProjectEntityTestData.getIsPublicTrue());
     taskEntities.add(taskEntity);
@@ -55,6 +61,7 @@ public class TaskEntityTestData {
   public static final List<TaskEntity> listIsPublicFalse() {
     final TaskEntity taskEntity = getStatusUpFprGrab();
     final List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntity.setGithubId(ISSUE_ID_UPFORGRAB_CLOSED);
     taskEntity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     taskEntity.setProject(ProjectEntityTestData.getIspublicFalse());
     taskEntities.add(taskEntity);
