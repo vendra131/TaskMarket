@@ -6,7 +6,9 @@ import lombok.Data;
 public class TaskDTO {
 
   private String githubId;
-  private String name;
+  private String serviceName;
+  private String behaviourName;
+  private String documentation;
   private String project;
   private String responsible;
   private TaskStatusEnum status;

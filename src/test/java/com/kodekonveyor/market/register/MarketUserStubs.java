@@ -19,6 +19,9 @@ public class MarketUserStubs {
         .findByLogin(UserEntityTestData.get());
     doReturn(new ArrayList<MarketUserEntity>()).when(marketUserEntityRepository)
         .findByLogin(UserEntityTestData.getLoginNoMarket());
+    doReturn(List.of(MarketUserEntityTestData.get()))
+        .when(marketUserEntityRepository)
+        .findByLoginAndLoginLogin(UserEntityTestData.get().getLogin());
   }
 
   public static void contractTermsAccepted(
