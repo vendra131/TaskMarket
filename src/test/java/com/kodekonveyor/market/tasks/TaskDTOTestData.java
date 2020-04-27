@@ -1,9 +1,8 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.List;
-
+import com.kodekonveyor.authentication.UserEntityTestData;
 import com.kodekonveyor.market.project.ProjectEntityTestData;
-import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
 public class TaskDTOTestData {
 
@@ -14,8 +13,10 @@ public class TaskDTOTestData {
     taskDTO.setBehaviourName(TaskEntityTestData.BEHAVIOUR);
     taskDTO.setDocumentation(TaskEntityTestData.DOCUMENTATION);
     taskDTO.setProject(ProjectEntityTestData.get().getName());
+    taskDTO.setName(TaskEntityTestData.ISSUE_NAME);
+    taskDTO.setProject(ProjectEntityTestData.NAME);
     taskDTO
-        .setResponsible(MarketUserEntityTestData.get().getLogin().getLogin());
+        .setResponsible(UserEntityTestData.LOGIN);
     return taskDTO;
   }
 

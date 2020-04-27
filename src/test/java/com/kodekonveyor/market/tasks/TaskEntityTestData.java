@@ -1,7 +1,6 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.List;
-
 import com.kodekonveyor.market.project.ProjectEntityTestData;
 import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
@@ -17,17 +16,6 @@ public class TaskEntityTestData {
   public static final String DOCUMENTATION =
       "Task Description: documentation End of Task Description";
 
-  public static final TaskEntity get() {
-    final TaskEntity taskEntity = new TaskEntity();
-    taskEntity.setGithubId(ISSUE_ID);
-    taskEntity.setServiceName(ISSUE_NAME);
-    taskEntity.setBehaviourName(BEHAVIOUR);
-    taskEntity.setDocumentation(DOCUMENTATION);
-    taskEntity.setProject(ProjectEntityTestData.getNullMilestone());
-    taskEntity.setResponsible(MarketUserEntityTestData.get());
-    return taskEntity;
-  }
-
   public static final TaskEntity getDifferentIssueName() {
     final TaskEntity taskEntity = get();
     taskEntity.setServiceName(DIFFERENT_ISSUE_NAME);
@@ -42,6 +30,15 @@ public class TaskEntityTestData {
 
   public static final List<TaskEntity> list() {
     return List.of(get());
+    
+  public static TaskEntity get() {
+    final TaskEntity entity = new TaskEntity();
+    entity.setGithubId(ISSUE_ID);
+    entity.setName(ISSUE_NAME);
+    entity.setProject(ProjectEntityTestData.get());
+    entity.setResponsible(MarketUserEntityTestData.get());
+    entity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
+    return entity;
   }
 
 }
