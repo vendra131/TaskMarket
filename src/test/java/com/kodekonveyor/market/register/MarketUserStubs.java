@@ -21,7 +21,7 @@ public class MarketUserStubs {
         .findByLogin(UserEntityTestData.getLoginNoMarket());
     doReturn(List.of(MarketUserEntityTestData.get()))
         .when(marketUserEntityRepository)
-        .findByLogin_Login(UserEntityTestData.get().getLogin());
+        .findByLoginLogin(UserEntityTestData.get().getLogin());
   }
 
   public static void contractTermsAccepted(

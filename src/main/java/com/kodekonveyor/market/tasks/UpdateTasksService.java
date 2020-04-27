@@ -57,7 +57,7 @@ public class UpdateTasksService {
     taskEntity.setProject(projectEntity);
 
     final MarketUserEntity marketUserEntity = marketUserEntityRepository
-        .findByLogin_Login(taskDTO.getResponsible()).get(0);
+        .findByLoginLogin(taskDTO.getResponsible()).get(0);
     taskEntity.setResponsible(marketUserEntity);
     taskEntityRepository.save(taskEntity);
   }
