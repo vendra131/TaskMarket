@@ -39,4 +39,5 @@ public class UpdateProjectModelControllerTestBase {
     TaskEntityStubs.behaviour(taskEntityRepository, getRepositoryTasksService);
     MarketUserStubs.behaviour(marketUserEntityRepository, registerTestData);
     ProjectEntityStubs.behaviour(projectEntityRepository);
+  }
 }

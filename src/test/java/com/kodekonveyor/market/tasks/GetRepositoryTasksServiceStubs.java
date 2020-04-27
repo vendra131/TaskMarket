@@ -11,7 +11,7 @@ public class GetRepositoryTasksServiceStubs {
       final GetRepositoryTasksService getRepositoryTasksService
   ) throws JSONException {
 
-    Mockito.doReturn(List.of(TaskDToTestData.get())).when(
+    Mockito.doReturn(List.of(TaskDTOTestData.get())).when(
         getRepositoryTasksService
     ).call(GetRepositoryTasksServiceTestData.REPO_NAME);
 

@@ -1,6 +1,7 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.List;
+
 import com.kodekonveyor.market.project.ProjectEntityTestData;
 import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
@@ -30,7 +31,8 @@ public class TaskEntityTestData {
 
   public static final List<TaskEntity> list() {
     return List.of(get());
-    
+  }
+
   public static TaskEntity get() {
     final TaskEntity entity = new TaskEntity();
     entity.setGithubId(ISSUE_ID);
