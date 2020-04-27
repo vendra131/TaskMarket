@@ -1,12 +1,12 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kodekonveyor.market.github.GithubConstants;
@@ -14,13 +14,8 @@ import com.kodekonveyor.market.github.GithubConstants;
 @Service
 public class GetRepositoryTasksService {
 
-  @Autowired
-  private TaskEntityRepository taskRepository;
-
   public List<TaskDTO> call() {
-    final List<TaskEntity> tasks = (List<TaskEntity>) taskRepository.findAll();
-    tasks.forEach(task -> new TaskListDTO(task));
-    return TaskListDTO.list();
+    return Collections.emptyList();
   }
 
   GithubCallService githubRequest; //NOPMD
