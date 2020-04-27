@@ -74,7 +74,8 @@ public class UpdateTasksController {
       entity.setGithubId(taskDTO.getGithubId());
       entity.setName(taskDTO.getName());
       entity.setStatus(taskDTO.getStatus());
-
+      entity.setBehaviourName(taskDTO.getBehaviourName());
+      entity.setDocumentation(taskDTO.getDocumentation());
       entity.setProject(project);
 
       final UserEntity user =
