@@ -1,10 +1,11 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.List;
+
 import com.kodekonveyor.authentication.UserEntityTestData;
 import com.kodekonveyor.market.project.ProjectEntityTestData;
 
-public class TaskDTOTestData {
+public class TaskDToTestData {
 
   public static final TaskDTO get() {
     final TaskDTO taskDTO = new TaskDTO();
