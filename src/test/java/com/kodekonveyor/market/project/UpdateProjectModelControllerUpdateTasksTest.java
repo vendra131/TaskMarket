@@ -27,7 +27,6 @@ public class UpdateProjectModelControllerUpdateTasksTest
   @Test
   @DisplayName("The new task is created successfully")
   public void test() {
-    ProjectEntityStubs.behaviour(projectEntityRepository);
     updateTasksService
         .call(ModelExcerptDTOTestData.getDifferentTaskName().getTasks());
     Mockito.verify(taskEntityRepository)
@@ -37,7 +36,6 @@ public class UpdateProjectModelControllerUpdateTasksTest
   @Test
   @DisplayName("The task with updated documentation is saved successfully")
   public void test1() {
-    ProjectEntityStubs.behaviour(projectEntityRepository);
     updateTasksService
         .call(ModelExcerptDTOTestData.getNewDescription().getTasks());
     Mockito.verify(taskEntityRepository)
@@ -47,7 +45,6 @@ public class UpdateProjectModelControllerUpdateTasksTest
   @Test
   @DisplayName("The documentation of the task is updated successfully")
   public void test2() {
-    ProjectEntityStubs.behaviour(projectEntityRepository);
     updateTasksService
         .call(ModelExcerptDTOTestData.getNewDescription().getTasks());
     assertEquals(

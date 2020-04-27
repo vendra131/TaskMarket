@@ -14,14 +14,13 @@ import lombok.Data;
 @Entity
 public class TaskEntity {
 
-  private String serviceName;
   private String behaviourName;
   private String documentation;
-  
+
   @Id
   private String githubId;
   private String name;
-  
+
   @OneToOne(fetch = FetchType.LAZY)
   private ProjectEntity project;
 

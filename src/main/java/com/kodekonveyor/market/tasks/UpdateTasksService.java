@@ -29,7 +29,7 @@ public class UpdateTasksService {
   public void call(final TaskDTO taskDTO) {
     final List<TaskDTO> list = getRepositoryTasksService.call();
     for (final TaskDTO dto : list)
-      if (dto.getServiceName().equals(taskDTO.getServiceName())) {
+      if (dto.getName().equals(taskDTO.getName())) {
         if (!dto.getDocumentation().equals(taskDTO.getDocumentation())) {
           final String description = StringUtils.substringBetween(
               taskDTO.getDocumentation(), TaskConstants.START_DELIMETER,
@@ -50,7 +50,7 @@ public class UpdateTasksService {
     taskEntity.setBehaviourName(taskDTO.getBehaviourName());
     taskEntity.setDocumentation(taskDTO.getDocumentation());
     taskEntity.setGithubId(taskDTO.getGithubId());
-    taskEntity.setServiceName(taskDTO.getServiceName());
+    taskEntity.setName(taskDTO.getName());
     taskEntity.setStatus(taskDTO.getStatus());
     final ProjectEntity projectEntity =
         projectEntityRepository.findByName(taskDTO.getProject()).get(0);

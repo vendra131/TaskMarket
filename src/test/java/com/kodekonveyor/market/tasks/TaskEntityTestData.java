@@ -19,7 +19,7 @@ public class TaskEntityTestData {
 
   public static final TaskEntity getDifferentIssueName() {
     final TaskEntity taskEntity = get();
-    taskEntity.setServiceName(DIFFERENT_ISSUE_NAME);
+    taskEntity.setName(DIFFERENT_ISSUE_NAME);
     return taskEntity;
   }
 
@@ -37,6 +37,8 @@ public class TaskEntityTestData {
     final TaskEntity entity = new TaskEntity();
     entity.setGithubId(ISSUE_ID);
     entity.setName(ISSUE_NAME);
+    entity.setBehaviourName(BEHAVIOUR);
+    entity.setDocumentation(DOCUMENTATION);
     entity.setProject(ProjectEntityTestData.get());
     entity.setResponsible(MarketUserEntityTestData.get());
     entity.setStatus(TaskStatusEnum.UP_FOR_GRAB);

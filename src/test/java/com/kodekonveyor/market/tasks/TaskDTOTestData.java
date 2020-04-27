@@ -10,7 +10,7 @@ public class TaskDTOTestData {
   public static final TaskDTO get() {
     final TaskDTO taskDTO = new TaskDTO();
     taskDTO.setGithubId(TaskEntityTestData.ISSUE_ID);
-    taskDTO.setServiceName(TaskEntityTestData.ISSUE_NAME);
+    taskDTO.setName(TaskEntityTestData.ISSUE_NAME);
     taskDTO.setBehaviourName(TaskEntityTestData.BEHAVIOUR);
     taskDTO.setDocumentation(TaskEntityTestData.DOCUMENTATION);
     taskDTO.setProject(ProjectEntityTestData.get().getName());
@@ -18,12 +18,13 @@ public class TaskDTOTestData {
     taskDTO.setProject(ProjectEntityTestData.NAME);
     taskDTO
         .setResponsible(UserEntityTestData.LOGIN);
+    taskDTO.setStatus(TaskStatusEnum.UP_FOR_GRAB);
     return taskDTO;
   }
 
   public static final TaskDTO getDifferentIssueName() {
     final TaskDTO taskDTO = get();
-    taskDTO.setServiceName(TaskEntityTestData.DIFFERENT_ISSUE_NAME);
+    taskDTO.setName(TaskEntityTestData.DIFFERENT_ISSUE_NAME);
     return taskDTO;
   }
 
