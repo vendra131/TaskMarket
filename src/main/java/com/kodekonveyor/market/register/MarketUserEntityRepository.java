@@ -11,6 +11,6 @@ public interface MarketUserEntityRepository
 
   List<MarketUserEntity> findByLogin(UserEntity userEntity);
 
-  List<MarketUserEntity> findByLogin_Login(String username);
+  List<MarketUserEntity> findByLoginLogin(String username);
 
 }
