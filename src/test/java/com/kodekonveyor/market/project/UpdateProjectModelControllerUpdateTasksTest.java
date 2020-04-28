@@ -2,6 +2,7 @@ package com.kodekonveyor.market.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
+import com.kodekonveyor.authentication.AuthenticatedUserStubs;
 import com.kodekonveyor.market.tasks.TaskEntityTestData;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,6 +25,13 @@ import com.kodekonveyor.market.tasks.TaskEntityTestData;
 @TestedService("UpdateProjectModelController")
 public class UpdateProjectModelControllerUpdateTasksTest
     extends UpdateProjectModelControllerTestBase {
+
+  @Override
+  @BeforeEach
+  void setUp() {
+    super.setUp();
+    AuthenticatedUserStubs.projectManager(authenticatedUserService);
+  }
 
   @Test
   @DisplayName("The new task is created successfully")

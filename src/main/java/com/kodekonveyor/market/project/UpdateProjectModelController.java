@@ -24,8 +24,6 @@ public class UpdateProjectModelController {
     project.setMilestones(modelExcerptDTO.getMilestones());
     projectEntityRepository.save(project);
 
-    updateTasksService.call(modelExcerptDTO.getTasks());
-
   }
 
 }

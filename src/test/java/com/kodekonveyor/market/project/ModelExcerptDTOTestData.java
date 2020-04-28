@@ -15,14 +15,12 @@ public class ModelExcerptDTOTestData {
 
   public static ModelExcerptDTO getDifferentTaskName() {
     final ModelExcerptDTO dto = new ModelExcerptDTO();
-    dto.setMilestones(null);
     dto.setTasks(TaskDTOTestData.getDifferentIssueName());
     return dto;
   }
 
   public static ModelExcerptDTO getNewDescription() {
     final ModelExcerptDTO dto = new ModelExcerptDTO();
-    dto.setMilestones(null);
     dto.setTasks(TaskDTOTestData.getNewDescription());
     return dto;
   }

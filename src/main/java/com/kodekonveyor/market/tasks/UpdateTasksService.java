@@ -26,7 +26,7 @@ public class UpdateTasksService {
   private TaskEntityRepository taskEntityRepository;
 
   @Autowired
-  AuthenticatedUserService authenticatedUserService;
+  private AuthenticatedUserService authenticatedUserService;
 
   @Autowired
   private ProjectEntityRepository projectEntityRepository;
@@ -35,11 +35,13 @@ public class UpdateTasksService {
   private MarketUserEntityRepository marketUserEntityRepository;
 
   public void call(final TaskDTO taskDTO) {
+
     final UserEntity user = authenticatedUserService.call();
     if (
       !CheckRoleUtil.hasRole(user, ProjectConstants.PROJECT_MANAGER)
     )
-      throw new UnauthorizedException(ProjectConstants.IN_CREATE_PROJECT);
+      throw new UnauthorizedException(TaskConstants.NO_PROJECT_MANAGER_ROLE);
+
     final List<TaskDTO> list = getRepositoryTasksService.call();
     for (final TaskDTO dto : list)
       if (dto.getName().equals(taskDTO.getName())) {
