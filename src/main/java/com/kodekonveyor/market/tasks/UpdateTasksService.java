@@ -6,6 +6,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kodekonveyor.authentication.AuthenticatedUserService;
+import com.kodekonveyor.authentication.UserEntity;
+import com.kodekonveyor.market.UnauthorizedException;
+import com.kodekonveyor.market.lead.CheckRoleUtil;
+import com.kodekonveyor.market.project.ProjectConstants;
 import com.kodekonveyor.market.project.ProjectEntity;
 import com.kodekonveyor.market.project.ProjectEntityRepository;
 import com.kodekonveyor.market.register.MarketUserEntity;
@@ -21,12 +26,20 @@ public class UpdateTasksService {
   private TaskEntityRepository taskEntityRepository;
 
   @Autowired
+  AuthenticatedUserService authenticatedUserService;
+
+  @Autowired
   private ProjectEntityRepository projectEntityRepository;
 
   @Autowired
   private MarketUserEntityRepository marketUserEntityRepository;
 
   public void call(final TaskDTO taskDTO) {
+    final UserEntity user = authenticatedUserService.call();
+    if (
+      !CheckRoleUtil.hasRole(user, ProjectConstants.PROJECT_MANAGER)
+    )
+      throw new UnauthorizedException(ProjectConstants.IN_CREATE_PROJECT);
     final List<TaskDTO> list = getRepositoryTasksService.call();
     for (final TaskDTO dto : list)
       if (dto.getName().equals(taskDTO.getName())) {

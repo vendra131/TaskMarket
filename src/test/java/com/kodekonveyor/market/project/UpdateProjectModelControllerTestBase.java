@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import com.kodekonveyor.authentication.AuthenticatedUserService;
 import com.kodekonveyor.market.register.MarketUserDTOTestData;
 import com.kodekonveyor.market.register.MarketUserEntityRepository;
 import com.kodekonveyor.market.register.MarketUserStubs;
@@ -31,6 +32,9 @@ public class UpdateProjectModelControllerTestBase {
 
   @Mock
   MarketUserEntityRepository marketUserEntityRepository;
+
+  @Mock
+  AuthenticatedUserService authenticatedUserService;
 
   MarketUserDTOTestData registerTestData;
 
