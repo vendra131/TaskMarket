@@ -19,7 +19,7 @@ public class ListTasksControllerTestBase {
   MarketUserEntityRepository marketUserEntityRepository;
 
   @Mock
-  TaskRepository taskRepository;
+  TaskEntityRepository taskRepository;
 
   @BeforeEach
   void setUp() {

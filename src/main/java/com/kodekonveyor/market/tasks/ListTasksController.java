@@ -23,7 +23,7 @@ public class ListTasksController {
   MarketUserEntityRepository marketUserEntityRepository;
 
   @Autowired
-  TaskRepository taskRepository;
+  TaskEntityRepository taskRepository;
 
   @GetMapping(UrlMapConstants.LIST_TASK_PATH)
   public List<TaskDTO> call() {

@@ -8,7 +8,7 @@ import com.kodekonveyor.market.register.MarketUserEntityTestData;
 public class TaskEntityStubs {
 
   public static void behaviour(
-      final TaskRepository taskRepository
+      final TaskEntityRepository taskRepository
   ) {
     reset(taskRepository);
     doReturn(TaskEntityTestData.listStatusInProgress()).when(taskRepository)

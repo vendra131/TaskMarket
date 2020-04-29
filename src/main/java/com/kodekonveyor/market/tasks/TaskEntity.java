@@ -19,8 +19,7 @@ public class TaskEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  
-  @Id
+
   private String githubId;
   private String name;
 
