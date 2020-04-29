@@ -16,12 +16,12 @@ import lombok.Data;
 @Entity
 public class TaskEntity {
 
-  private String githubId;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-
+  
+  @Id
+  private String githubId;
   private String name;
 
   @OneToOne(fetch = FetchType.LAZY)
@@ -29,7 +29,5 @@ public class TaskEntity {
 
   @OneToOne(fetch = FetchType.LAZY)
   private MarketUserEntity responsible;
-
   private TaskStatusEnum status;
-
 }

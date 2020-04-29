@@ -2,26 +2,26 @@ package com.kodekonveyor.market.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.kodekonveyor.market.project.ProjectEntityTestData;
 import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
 public class TaskEntityTestData {
 
-  public static final String ISSUE_ID = "1234";
   public static final String ISSUE_ID_INPROGRESS = "4567";
   public static final String ISSUE_ID_UPFORGRAB_OPEN = "5897";
   public static final String ISSUE_ID_UPFORGRAB_CLOSED = "5997";
   public static final String ISSUE_ID_CLOSED = "9897";
-  public static final String ISSUE_NAME = "xyz";
+  public static final String ISSUE_ID = "4422";
+  public static final String ISSUE_NAME = "SomeController/behaviour";
 
-  public static final TaskEntity get() {
-    final TaskEntity taskEntity = new TaskEntity();
-    taskEntity.setGithubId(ISSUE_ID);
-    taskEntity.setName(ISSUE_NAME);
-    taskEntity.setProject(ProjectEntityTestData.get());
-    taskEntity.setResponsible(MarketUserEntityTestData.get());
-    return taskEntity;
+  public static TaskEntity get() {
+    final TaskEntity entity = new TaskEntity();
+    entity.setGithubId(ISSUE_ID);
+    entity.setName(ISSUE_NAME);
+    entity.setProject(ProjectEntityTestData.get());
+    entity.setResponsible(MarketUserEntityTestData.get());
+    entity.setStatus(TaskStatusEnum.UP_FOR_GRAB);
+    return entity;
   }
 
   public static final TaskEntity getStatusUpFprGrab() {
