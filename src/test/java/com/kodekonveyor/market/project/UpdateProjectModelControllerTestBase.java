@@ -8,7 +8,6 @@ import com.kodekonveyor.authentication.AuthenticatedUserService;
 import com.kodekonveyor.market.register.MarketUserDTOTestData;
 import com.kodekonveyor.market.register.MarketUserEntityRepository;
 import com.kodekonveyor.market.register.MarketUserStubs;
-import com.kodekonveyor.market.tasks.GetRepositoryTasksService;
 import com.kodekonveyor.market.tasks.TaskEntityRepository;
 import com.kodekonveyor.market.tasks.TaskEntityStubs;
 import com.kodekonveyor.market.tasks.UpdateTasksService;
@@ -28,9 +27,6 @@ public class UpdateProjectModelControllerTestBase {
   TaskEntityRepository taskEntityRepository;
 
   @Mock
-  GetRepositoryTasksService getRepositoryTasksService;
-
-  @Mock
   MarketUserEntityRepository marketUserEntityRepository;
 
   @Mock
@@ -40,7 +36,7 @@ public class UpdateProjectModelControllerTestBase {
 
   @BeforeEach
   void setUp() {
-    TaskEntityStubs.behaviour(taskEntityRepository, getRepositoryTasksService);
+    TaskEntityStubs.behaviour(taskEntityRepository);
     MarketUserStubs.behaviour(marketUserEntityRepository, registerTestData);
     ProjectEntityStubs.behaviour(projectEntityRepository);
   }

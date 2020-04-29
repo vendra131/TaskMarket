@@ -1,7 +1,6 @@
 package com.kodekonveyor.market.tasks;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -13,10 +12,6 @@ import com.kodekonveyor.market.github.GithubConstants;
 
 @Service
 public class GetRepositoryTasksService {
-
-  public List<TaskDTO> call() {
-    return Collections.emptyList();
-  }
 
   GithubCallService githubRequest; //NOPMD
 

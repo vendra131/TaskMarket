@@ -1,7 +1,5 @@
 package com.kodekonveyor.market.tasks;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +16,6 @@ import com.kodekonveyor.market.register.MarketUserEntityRepository;
 
 @Service
 public class UpdateTasksService {
-
-  @Autowired
-  private GetRepositoryTasksService getRepositoryTasksService;
 
   @Autowired
   private TaskEntityRepository taskEntityRepository;
@@ -42,19 +37,19 @@ public class UpdateTasksService {
     )
       throw new UnauthorizedException(TaskConstants.NO_PROJECT_MANAGER_ROLE);
 
-    final List<TaskDTO> list = getRepositoryTasksService.call();
-    for (final TaskDTO dto : list)
-      if (dto.getName().equals(taskDTO.getName())) {
-        if (!dto.getDocumentation().equals(taskDTO.getDocumentation())) {
+    final Iterable<TaskEntity> list = taskEntityRepository.findAll();
+    for (final TaskEntity task : list)
+      if (task.getName().equals(taskDTO.getName())) {
+        if (!task.getDocumentation().equals(taskDTO.getDocumentation())) {
           final String description = StringUtils.substringBetween(
               taskDTO.getDocumentation(), TaskConstants.START_DELIMETER,
               TaskConstants.END_DELIMETER
           );
-          dto.setDocumentation(
+          task.setDocumentation(
               TaskConstants.START_DELIMETER + description +
                   TaskConstants.END_DELIMETER
           );
-          storage(dto);
+          storage(task);
         }
       } else
         storage(taskDTO);
@@ -70,10 +65,21 @@ public class UpdateTasksService {
     final ProjectEntity projectEntity =
         projectEntityRepository.findByName(taskDTO.getProject()).get(0);
     taskEntity.setProject(projectEntity);
-
     final MarketUserEntity marketUserEntity = marketUserEntityRepository
         .findByLoginLogin(taskDTO.getResponsible()).get(0);
     taskEntity.setResponsible(marketUserEntity);
+    taskEntityRepository.save(taskEntity);
+  }
+
+  private void storage(final TaskEntity task) {
+    final TaskEntity taskEntity = new TaskEntity();
+    taskEntity.setBehaviourName(task.getBehaviourName());
+    taskEntity.setDocumentation(task.getDocumentation());
+    taskEntity.setGithubId(task.getGithubId());
+    taskEntity.setName(task.getName());
+    taskEntity.setStatus(task.getStatus());
+    taskEntity.setProject(task.getProject());
+    taskEntity.setResponsible(task.getResponsible());
     taskEntityRepository.save(taskEntity);
   }
 }
