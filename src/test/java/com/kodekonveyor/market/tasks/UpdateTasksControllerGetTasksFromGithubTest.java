@@ -43,7 +43,7 @@ public class UpdateTasksControllerGetTasksFromGithubTest
   void test2() throws JSONException {
     updateTasksController.call();
     assertEquals(
-        TaskDToTestData.get().getGithubId(),
+        TaskDTOTestData.get().getGithubId(),
         TaskEntityTestData.get().getGithubId()
     );
   }
@@ -55,7 +55,7 @@ public class UpdateTasksControllerGetTasksFromGithubTest
   void test3() throws JSONException {
     updateTasksController.call();
     assertEquals(
-        TaskDToTestData.get().getName(), TaskEntityTestData.get().getName()
+        TaskDTOTestData.get().getName(), TaskEntityTestData.get().getName()
     );
   }
 
@@ -89,7 +89,7 @@ public class UpdateTasksControllerGetTasksFromGithubTest
   void test6() throws JSONException {
     updateTasksController.call();
     assertEquals(
-        TaskDToTestData.get().getStatus(), TaskEntityTestData.get().getStatus()
+        TaskDTOTestData.get().getStatus(), TaskEntityTestData.get().getStatus()
     );
   }
 
