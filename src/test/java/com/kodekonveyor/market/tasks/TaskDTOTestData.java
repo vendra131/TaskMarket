@@ -1,18 +1,18 @@
 package com.kodekonveyor.market.tasks;
 
-import com.kodekonveyor.authentication.UserEntityTestData;
-import com.kodekonveyor.market.project.ProjectEntityTestData;
+import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
 public class TaskDTOTestData {
 
-  public static final TaskDTO get() {
-    final TaskDTO taskDTO = new TaskDTO();
-    taskDTO.setGithubId(TaskEntityTestData.ISSUE_ID);
-    taskDTO.setName(TaskEntityTestData.ISSUE_NAME);
-    taskDTO.setProject(ProjectEntityTestData.NAME);
-    taskDTO
-        .setResponsible(UserEntityTestData.LOGIN);
-    return taskDTO;
+  public static TaskDTO get() {
+    final TaskDTO dto = new TaskDTO();
+    dto.setGithubId(TaskEntityTestData.ISSUE_ID);
+    dto.setName(TaskEntityTestData.ISSUE_NAME);
+    dto.setProject(GetRepositoryTasksServiceTestData.REPO_NAME);
+    dto.setResponsible(MarketUserEntityTestData.get().getLogin().getLogin());
+    dto.setStatus(TaskStatusEnum.UP_FOR_GRAB);
+
+    return dto;
   }
 
 }
