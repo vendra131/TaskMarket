@@ -39,7 +39,8 @@ public class GithubGetService {
       final HttpUriRequest request = RequestBuilder.get()
           .setUri(url)
           .setHeader(
-              HttpHeaders.AUTHORIZATION, SpringConfig.issuetoken
+              HttpHeaders.AUTHORIZATION,
+              GithubConstants.TOKEN + SpringConfig.issuetoken
           )
           .build();
       final HttpResponse response = client.execute(request);

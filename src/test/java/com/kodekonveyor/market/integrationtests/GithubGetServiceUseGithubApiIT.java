@@ -2,6 +2,8 @@ package com.kodekonveyor.market.integrationtests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,6 @@ import org.springframework.test.context.TestPropertySource;
 import com.kodekonveyor.SpringConfig;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.exception.ThrowableTester;
 
 @SpringBootTest(
     webEnvironment = WebEnvironment.MOCK, classes = SpringConfig.class
@@ -34,11 +35,10 @@ public class GithubGetServiceUseGithubApiIT extends GithubGetServiceTestBase {
   @DisplayName(
     "Get Github api data"
   )
-  void test() {
-    ThrowableTester.assertNoException(
-        () -> assertEquals(
-            githubGetService.call(JsonResultTestData.GITHUB_API_URL), JsonResultTestData.get()
-        )
+  void test() throws IOException {
+    assertEquals(
+        JsonResultTestData.get(),
+        githubGetService.call(JsonResultTestData.GITHUB_API_URL)
     );
   }
 }

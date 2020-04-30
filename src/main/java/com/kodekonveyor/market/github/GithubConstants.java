@@ -28,5 +28,6 @@ public class GithubConstants {
   public static final String TITLE = "title";
   public static final String UP_FOR_GRAB = "up for grab";
   public static final String USER = "user";
+  public static final String TOKEN = "token ";
 
 }
