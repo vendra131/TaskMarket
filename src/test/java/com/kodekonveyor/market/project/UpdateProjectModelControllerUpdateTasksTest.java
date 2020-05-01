@@ -34,7 +34,7 @@ public class UpdateProjectModelControllerUpdateTasksTest
   }
 
   @Test
-  @DisplayName("The new task is created successfully")
+  @DisplayName("If there is no github issue with the name, then it is created.")
   public void test() {
     updateTasksService
         .call(ModelExcerptDTOTestData.getDifferentTaskName().getTasks());
@@ -62,4 +62,18 @@ public class UpdateProjectModelControllerUpdateTasksTest
         TaskEntityTestData.getNewDescription().getDocumentation()
     );
   }
+
+  @Test
+  @DisplayName(
+    "if the documentationof the task is the same as the documentation of the github ,Then nothing is done "
+  )
+  public void test3() {
+    updateTasksService
+        .call(ModelExcerptDTOTestData.getNewDescription().getTasks());
+    assertEquals(
+        ModelExcerptDTOTestData.get().getTasks().getDocumentation(),
+        TaskEntityTestData.get().getDocumentation()
+    );
+  }
+
 }
