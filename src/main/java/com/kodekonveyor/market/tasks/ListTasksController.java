@@ -30,7 +30,7 @@ public class ListTasksController {
   public List<TaskDTO> call() {
     final UserEntity user = authenticatedUserService.call();
     final Optional<MarketUserEntity> marketUserEntities =
-        marketUserEntityRepository.findByLogin(user);
+        marketUserEntityRepository.findByUser(user);
     MarketUserEntity marketUserEntity = new MarketUserEntity();
     if (marketUserEntities.isPresent())
       marketUserEntity = marketUserEntities.get();

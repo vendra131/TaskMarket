@@ -17,8 +17,7 @@ import org.mockito.quality.Strictness;
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
 import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
-import com.kodekonveyor.market.register.MarketUserDTOTestData;
-import com.kodekonveyor.market.register.MarketUserStubs;
+import com.kodekonveyor.market.register.MarketUserEntityRepositoryStubs;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -28,14 +27,12 @@ import com.kodekonveyor.market.register.MarketUserStubs;
 public class ListTasksControllerListUsersTasksTest
     extends ListTasksControllerTestBase {
 
-  MarketUserDTOTestData registerTestData;
-
   @Override
   @BeforeEach
   void setUp() {
     super.setUp();
-    MarketUserStubs
-        .behaviour(marketUserEntityRepository, registerTestData);
+    MarketUserEntityRepositoryStubs
+        .behaviour(marketUserEntityRepository);
     AuthenticatedUserServiceStubs.authenticated(authenticatedUserService);
   }
 
