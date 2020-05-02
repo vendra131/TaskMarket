@@ -39,7 +39,7 @@ public class UpdateProjectModelControllerUpdateTasksTest
     updateTasksService
         .call(ModelExcerptDTOTestData.getDifferentTaskName().getTasks());
     Mockito.verify(taskEntityRepository)
-        .save(TaskEntityTestData.newTask());
+        .save(TaskEntityTestData.getDifferentBehaviour());
   }
 
   @Test
