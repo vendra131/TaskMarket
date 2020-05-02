@@ -1,18 +1,22 @@
 package com.kodekonveyor.market.tasks;
 
-import com.kodekonveyor.authentication.UserEntityTestData;
-import com.kodekonveyor.market.project.ProjectEntityTestData;
+import javax.annotation.Generated;
 
+import com.kodekonveyor.market.project.MilestoneTestData;
+
+@Generated("by zenta-tools")
 public class TaskDTOTestData {
 
-  public static final TaskDTO get() {
+  public final static TaskDTO get() {
     final TaskDTO taskDTO = new TaskDTO();
-    taskDTO.setGithubId(TaskEntityTestData.ISSUE_ID);
-    taskDTO.setName(TaskEntityTestData.ISSUE_NAME);
-    taskDTO.setProject(ProjectEntityTestData.NAME);
-    taskDTO
-        .setResponsible(UserEntityTestData.LOGIN);
+    taskDTO.setId(TaskTestData.ID);
+    taskDTO.setMilestone(MilestoneTestData.ID);
+    taskDTO.setService(TaskTestData.SERVICE);
+    taskDTO.setBehaviour(TaskTestData.BEHAVIOUR);
+    taskDTO.setGithubId(TaskTestData.GITHUB_ID);
+    taskDTO.setDescription(TaskTestData.DESCRIPTION);
+
     return taskDTO;
-  }
+  };
 
 }

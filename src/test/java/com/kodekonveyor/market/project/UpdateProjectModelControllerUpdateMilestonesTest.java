@@ -2,6 +2,8 @@ package com.kodekonveyor.market.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,18 +28,21 @@ public class UpdateProjectModelControllerUpdateMilestonesTest
   @Test
   @DisplayName("The project with updated milestones is saved successfully")
   public void test() {
-    updateProjectModelController.call(ModelExcerptDTOTestData.get());
+    updateProjectModelController
+        .call(ProjectModelDTOTestData.get(), ProjectTestData.NAME);
     Mockito.verify(projectEntityRepository)
-        .save(ProjectEntityTestData.getMilestonesUpdated());
-
+        .save(ProjectEntityTestData.getNullId());
   }
 
   @Test
   @DisplayName("The milestones of the project are updated successfully")
   public void test1() {
+    ProjectEntityRepositoryStubs.behaviour(projectEntityRepository);
+    updateProjectModelController
+        .call(ProjectModelDTOTestData.get(), ProjectTestData.NAME);
     assertEquals(
-        ModelExcerptDTOTestData.get().getMilestones(),
-        ProjectEntityTestData.getMilestonesUpdated().getMilestones()
+        ProjectModelDTOTestData.get().getMilestone(),
+        Set.of(MilestoneTestData.ID)
     );
 
   }
