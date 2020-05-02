@@ -16,7 +16,7 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
 import com.kodekonveyor.market.register.MarketUserDTOTestData;
 import com.kodekonveyor.market.register.MarketUserStubs;
 
@@ -36,38 +36,38 @@ public class ListTasksControllerListUsersTasksTest
     super.setUp();
     MarketUserStubs
         .behaviour(marketUserEntityRepository, registerTestData);
-    AuthenticatedUserStubs.authenticated(authenticatedUserService);
+    AuthenticatedUserServiceStubs.authenticated(authenticatedUserService);
   }
 
   @Test
   @DisplayName("List all In Progress task for a user")
   public void test() {
-    final String issueId = TaskEntityTestData.ISSUE_ID_INPROGRESS;
+    final long issueId = TaskEntityTestData.ISSUE_ID_INPROGRESS;
     assertListContainsId(issueId);
   }
 
   @Test
   @DisplayName("List all Up For Grab task for closed projects for a user")
   public void test1() {
-    final String issueId = TaskEntityTestData.ISSUE_ID_UPFORGRAB_CLOSED;
+    final long issueId = TaskEntityTestData.ISSUE_ID_UPFORGRAB_CLOSED;
     assertListContainsId(issueId);
   }
 
   @Test
   @DisplayName("List all Up For Grab task for open projects")
   public void test2() {
-    final String issueId = TaskEntityTestData.ISSUE_ID_UPFORGRAB_OPEN;
+    final long issueId = TaskEntityTestData.ISSUE_ID_UPFORGRAB_OPEN;
     assertListContainsId(issueId);
   }
 
   @Test
   @DisplayName("List all closed task for a user")
   public void test3() {
-    final String issueId = TaskEntityTestData.ISSUE_ID_CLOSED;
+    final long issueId = TaskEntityTestData.ISSUE_ID_CLOSED;
     assertListContainsId(issueId);
   }
 
-  private void assertListContainsId(final String issueId) {
+  private void assertListContainsId(final long issueId) {
     final List<TaskDTO> results = listTasksController.call();
     for (final TaskDTO result : results)
       if (result.getGithubId().equals(issueId))

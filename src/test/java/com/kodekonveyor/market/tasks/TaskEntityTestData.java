@@ -2,18 +2,19 @@ package com.kodekonveyor.market.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.kodekonveyor.market.project.ProjectEntityTestData;
-import com.kodekonveyor.market.register.MarketUserEntityTestData;
+
 import javax.annotation.Generated;
+
+import com.kodekonveyor.market.project.ProjectEntityTestData;
 
 @Generated("by zenta-tools")
 public class TaskEntityTestData {
 
-  public static final String ISSUE_ID_INPROGRESS = "4567";
-  public static final String ISSUE_ID_UPFORGRAB_OPEN = "5897";
-  public static final String ISSUE_ID_UPFORGRAB_CLOSED = "5997";
-  public static final String ISSUE_ID_CLOSED = "9897";
-  public static final String ISSUE_ID = "4422";
+  public static final long ISSUE_ID_INPROGRESS = 4567;
+  public static final long ISSUE_ID_UPFORGRAB_OPEN = 5897;
+  public static final long ISSUE_ID_UPFORGRAB_CLOSED = 5997;
+  public static final long ISSUE_ID_CLOSED = 9897;
+  public static final long ISSUE_ID = 4422;
   public static final String ISSUE_NAME = "SomeController/behaviour";
 
   public final static TaskEntity get() {

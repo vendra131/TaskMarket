@@ -1,6 +1,7 @@
 package com.kodekonveyor.market.project;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Generated;
@@ -25,18 +26,19 @@ public class ProjectEntityTestData {
 
   public static final ProjectEntity getIspublicFalse() {
     final ProjectEntity entity = get();
-    entity.setPublic(false);
+    entity.setIsPublic(false);
     return entity;
   }
 
   public static final ProjectEntity getIsPublicTrue() {
     final ProjectEntity entity = get();
-    entity.setPublic(true);
+    entity.setIsPublic(true);
     return entity;
   }
 
   public static List<ProjectEntity> list() {
     return List.of(get());
+  }
 
   public static ProjectEntity getNullId() {
     final ProjectEntity projectEntity = get();
@@ -59,8 +61,14 @@ public class ProjectEntityTestData {
     projectEntity.setName(ProjectTestData.NAME_KODE_KONVEYOR);
     projectEntity.setBudgetInCents(0L);
     projectEntity.setMilestone(new HashSet<>());
-    projectEntity.setRole(Set.of(RoleEntityTestData.getNameCanbepaid(), RoleEntityTestData.getNameProjectManager(),
-        RoleEntityTestData.getRoleKodekonveyorContract(), RoleEntityTestData.getRoleSales()));
+    projectEntity.setRole(
+        Set.of(
+            RoleEntityTestData.getNameCanbepaid(),
+            RoleEntityTestData.getNameProjectManager(),
+            RoleEntityTestData.getRoleKodekonveyorContract(),
+            RoleEntityTestData.getRoleSales()
+        )
+    );
     return projectEntity;
   };
 
