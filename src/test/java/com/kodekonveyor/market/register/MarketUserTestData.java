@@ -31,6 +31,8 @@ public class MarketUserTestData {
 
   public static final Long ID_IS_TERMS_ACCEPTED_FALSE = 1825L;
 
+  public static final Long ID_PROJECT_MANAGER = 1826L;
+
   public static final String NO_CONTRACT_ROLE = "no contract role";
 
 }

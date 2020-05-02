@@ -11,8 +11,14 @@ public class TaskTestData {
 
   public final static String BEHAVIOUR = "Get tasks from github";
 
-  public final static String DESCRIPTION = "description comes here";
+  public final static String DESCRIPTION =
+      "New Task Description: documentation is updated End of Task Description of New Description";
 
   public final static Long GITHUB_ID = 66L;
+
+  public final static String DIFFERENT_BEHAVIOUR = "Update tasks from github";
+
+  public static final String NEW_DESCRIPTION =
+      "New Task Description: documentation End of Task Description of New Description";
 
 }

@@ -1,6 +1,6 @@
 package com.kodekonveyor.market.tasks;
 
-public class TaskDToTestData {
+public class TaskDTOTestData {
 
   public static TaskDTO get() {
     final TaskDTO dto = new TaskDTO();
@@ -11,6 +11,18 @@ public class TaskDToTestData {
     dto.setDescription(TaskTestData.DESCRIPTION);
 
     return dto;
+  }
+
+  public static final TaskDTO getDifferentBehaviour() {
+    final TaskDTO taskDTO = get();
+    taskDTO.setBehaviour(TaskTestData.DIFFERENT_BEHAVIOUR);
+    return taskDTO;
+  }
+
+  public static final TaskDTO getNewDescription() {
+    final TaskDTO taskDTO = get();
+    taskDTO.setDescription(TaskTestData.NEW_DESCRIPTION);
+    return taskDTO;
   }
 
 }

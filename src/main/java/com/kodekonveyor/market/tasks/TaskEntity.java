@@ -19,9 +19,6 @@ import lombok.Data;
 @Entity
 public class TaskEntity {
 
-  private String behaviourName;
-  private String documentation;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

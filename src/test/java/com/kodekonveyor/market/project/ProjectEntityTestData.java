@@ -38,7 +38,7 @@ public class ProjectEntityTestData {
     return projectEntity;
   }
 
-  public static Object getNameKodeKonveyor() {
+  public static ProjectEntity getNameKodeKonveyor() {
     final ProjectEntity projectEntity = get();
     projectEntity.setId(ProjectTestData.ID_KODE_KONVEYOR);
     projectEntity.setName(ProjectTestData.NAME_KODE_KONVEYOR);

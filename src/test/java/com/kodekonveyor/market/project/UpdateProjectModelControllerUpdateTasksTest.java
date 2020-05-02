@@ -15,7 +15,7 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
 import com.kodekonveyor.market.tasks.TaskEntityTestData;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +30,7 @@ public class UpdateProjectModelControllerUpdateTasksTest
   @BeforeEach
   void setUp() {
     super.setUp();
-    AuthenticatedUserStubs.projectManager(authenticatedUserService);
+    AuthenticatedUserServiceStubs.projectManager(authenticatedUserService);
   }
 
   @Test
@@ -39,7 +39,7 @@ public class UpdateProjectModelControllerUpdateTasksTest
     updateTasksService
         .call(ModelExcerptDTOTestData.getDifferentTaskName().getTasks());
     Mockito.verify(taskEntityRepository)
-        .save(TaskEntityTestData.getDifferentIssueName());
+        .save(TaskEntityTestData.newTask());
   }
 
   @Test
@@ -58,8 +58,8 @@ public class UpdateProjectModelControllerUpdateTasksTest
         .call(ModelExcerptDTOTestData.getNewDescription().getTasks());
     assertEquals(
         ModelExcerptDTOTestData.getNewDescription().getTasks()
-            .getDocumentation(),
-        TaskEntityTestData.getNewDescription().getDocumentation()
+            .getDescription(),
+        TaskEntityTestData.getNewDescription().getDescription()
     );
   }
 
@@ -71,8 +71,8 @@ public class UpdateProjectModelControllerUpdateTasksTest
     updateTasksService
         .call(ModelExcerptDTOTestData.getNewDescription().getTasks());
     assertEquals(
-        ModelExcerptDTOTestData.get().getTasks().getDocumentation(),
-        TaskEntityTestData.get().getDocumentation()
+        ModelExcerptDTOTestData.get().getTasks().getDescription(),
+        TaskEntityTestData.get().getDescription()
     );
   }
 

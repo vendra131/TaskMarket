@@ -16,4 +16,16 @@ public class TaskEntityTestData {
     return taskEntity;
   };
 
+  public static final TaskEntity newTask() {
+    final TaskEntity taskEntity = get();
+    taskEntity.setId(null);
+    taskEntity.setBehaviour(TaskTestData.DIFFERENT_BEHAVIOUR);
+    return taskEntity;
+  }
+
+  public static final TaskEntity getNewDescription() {
+    final TaskEntity taskEntity = get();
+    taskEntity.setDescription(TaskTestData.NEW_DESCRIPTION);
+    return taskEntity;
+  }
 }

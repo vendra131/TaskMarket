@@ -11,7 +11,7 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
 import com.kodekonveyor.exception.ThrowableTester;
 import com.kodekonveyor.market.UnauthorizedException;
 
@@ -28,7 +28,7 @@ public class UpdateProjectModelControllerRolesTest
     "if the user does not have Project manager role, a UnauthorizedException is thrown"
   )
   void test() {
-    AuthenticatedUserStubs.authenticated(authenticatedUserService);
+    AuthenticatedUserServiceStubs.authenticated(authenticatedUserService);
     ThrowableTester.assertThrows(
         () -> updateTasksService.call(ModelExcerptDTOTestData.get().getTasks())
     ).assertException(UnauthorizedException.class);
@@ -39,7 +39,7 @@ public class UpdateProjectModelControllerRolesTest
     "if the user has Project_manager role, no exception is thrown"
   )
   void test1() {
-    AuthenticatedUserStubs.projectManager(authenticatedUserService);
+    AuthenticatedUserServiceStubs.projectManager(authenticatedUserService);
 
     ThrowableTester.assertNoException(
         () -> updateTasksService.call(ModelExcerptDTOTestData.get().getTasks())

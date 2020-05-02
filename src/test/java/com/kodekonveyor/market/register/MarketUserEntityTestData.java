@@ -106,4 +106,11 @@ public class MarketUserEntityTestData {
     return marketUserEntity;
   };
 
+  public static MarketUserEntity getRoleProjectManager() {
+    final MarketUserEntity marketUserEntity = get();
+    marketUserEntity.setId(MarketUserTestData.ID_PROJECT_MANAGER);
+    marketUserEntity.setUser(UserEntityTestData.getRoleProjectManager());
+    return marketUserEntity;
+  }
+
 }
