@@ -1,26 +1,26 @@
 package com.kodekonveyor.market.project;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.annotation.Generated;
+
+import com.kodekonveyor.authentication.RoleEntityTestData;
+
+@Generated("by zenta-tools")
 public class ProjectEntityTestData {
 
-  public final static Long ID = (long) 442;
-  public final static Long ID_NO_MILESTONES = (long) 442;
-  public final static String INVALID_PROJECT_NAME =
-      "kode-konveyor/Tas%$#@kMarket";
-  public final static String NAME = "kode-konveyor/TaskMarket";
-  public final static String NAME_MILESTONE_NULL =
-      "kode-konveyor/TaskMarketNullMilestoned";
-  public static final Long NON_POSITIVE_ID = (long) -442;
-  public static final Long ONE_ID = (long) 1;
-  public static final Long ZERO_ID = (long) 0;
+  public final static ProjectEntity get() {
+    final ProjectEntity projectEntity = new ProjectEntity();
+    projectEntity.setId(ProjectTestData.ID);
+    projectEntity.setRole(Set.of(RoleEntityTestData.get()));
+    projectEntity.setMilestone(Set.of(MilestoneEntityTestData.get()));
+    projectEntity.setPullRequest(Set.of(PullrequestEntityTestData.get()));
+    projectEntity.setName(ProjectTestData.NAME);
+    projectEntity.setBudgetInCents(ProjectTestData.BUDGET_IN_CENTS);
+    projectEntity.setIsPublic(ProjectTestData.IS_PUBLIC);
 
-  public static final ProjectEntity get() {
-    final ProjectEntity entity = new ProjectEntity();
-    entity.setId(ID);
-    entity.setName(NAME);
-    entity.setMilestones(null);
-    return entity;
+    return projectEntity;
   }
 
   public static final ProjectEntity getIspublicFalse() {
@@ -37,17 +37,31 @@ public class ProjectEntityTestData {
 
   public static List<ProjectEntity> list() {
     return List.of(get());
+
+  public static ProjectEntity getNullId() {
+    final ProjectEntity projectEntity = get();
+    projectEntity.setId(null);
+    projectEntity.setBudgetInCents(0L);
+    return projectEntity;
   }
 
-  public static ProjectEntity getMilestonesUpdated() {
-    final ProjectEntity entity = get();
-    entity.setMilestones(ModelExcerptDTOTestData.MILESTONE);
-    return entity;
+  public static ProjectEntity getNullIdWithoutMilestone() {
+    final ProjectEntity projectEntity = get();
+    projectEntity.setId(null);
+    projectEntity.setBudgetInCents(0L);
+    projectEntity.setMilestone(new HashSet<>());
+    return projectEntity;
   }
 
-  public static List<ProjectEntity> listMilestonesUpdated() {
-    return List.of(getMilestonesUpdated());
-
-  }
+  public static Object getNameKodeKonveyor() {
+    final ProjectEntity projectEntity = get();
+    projectEntity.setId(ProjectTestData.ID_KODE_KONVEYOR);
+    projectEntity.setName(ProjectTestData.NAME_KODE_KONVEYOR);
+    projectEntity.setBudgetInCents(0L);
+    projectEntity.setMilestone(new HashSet<>());
+    projectEntity.setRole(Set.of(RoleEntityTestData.getNameCanbepaid(), RoleEntityTestData.getNameProjectManager(),
+        RoleEntityTestData.getRoleKodekonveyorContract(), RoleEntityTestData.getRoleSales()));
+    return projectEntity;
+  };
 
 }

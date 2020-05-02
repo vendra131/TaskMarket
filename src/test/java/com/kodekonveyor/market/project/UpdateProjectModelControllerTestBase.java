@@ -12,8 +12,12 @@ public class UpdateProjectModelControllerTestBase {
   @Mock
   ProjectEntityRepository projectEntityRepository;
 
+  @Mock
+  MilestoneEntityRepository milestoneEntityRepository;
+
   @BeforeEach
   void setUp() {
-    ProjectEntityStubs.behaviour(projectEntityRepository);
+    ProjectEntityRepositoryStubs.behaviour(projectEntityRepository);
+    MilestoneEntityRepositoryStubs.behaviour(milestoneEntityRepository);
   }
 }

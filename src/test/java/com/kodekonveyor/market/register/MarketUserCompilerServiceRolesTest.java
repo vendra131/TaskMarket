@@ -11,9 +11,9 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.authentication.AuthenticatedUserStubs;
-import com.kodekonveyor.authentication.UserEntityTestData;
+import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
 import com.kodekonveyor.exception.ThrowableTester;
+import com.kodekonveyor.market.UnauthorizedException;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -25,26 +25,63 @@ public class MarketUserCompilerServiceRolesTest
 
   @Test
   @DisplayName(
-    "if the user does not have registered role, an Exception is thrown"
+    "if the user does not have can_be_paid role and looking for its own data, an Exception is thrown"
   )
   void test() {
-    AuthenticatedUserStubs.canBePayed(authenticatedUserService);
+    AuthenticatedUserServiceStubs.authenticated(authenticatedUserService);
     ThrowableTester.assertThrows(
-        () -> marketUserCompilerService.call(UserEntityTestData.ID)
+        () -> marketUserCompilerService.call(MarketUserTestData.ID)
     ).assertMessageIs(
-        RegisterConstants.UNAUTHORIZED_NOT_ENOUGH_RIGHTS
+        RegisterConstants.NO_CAN_BE_PAID_ROLE
     );
   }
 
   @Test
   @DisplayName(
-    "if the user havs registered role, no Exception is thrown"
+    "if the user does have can_be_paid role and looking for its own data, no Exception is thrown"
+  )
+  void test0() {
+    AuthenticatedUserServiceStubs.registered(authenticatedUserService);
+    ThrowableTester.assertNoException(
+        () -> marketUserCompilerService.call(MarketUserTestData.ID)
+    );
+  }
+
+  @Test
+  @DisplayName(
+    "if the user have contract role, no Exception is thrown"
   )
   void test1() {
-    AuthenticatedUserStubs.registered(authenticatedUserService);
+    AuthenticatedUserServiceStubs
+        .kodekonveyorContract(authenticatedUserService);
     ThrowableTester.assertNoException(
-        () -> marketUserCompilerService.call(UserEntityTestData.ID)
+        () -> marketUserCompilerService
+            .call(MarketUserTestData.ID_IS_TERMS_ACCEPTED_FALSE)
     );
+  }
+
+  @Test
+  @DisplayName(
+    "if the user is looking for another user and have no contract role, an UnauthorizedException is thrown"
+  )
+  void test2() {
+    AuthenticatedUserServiceStubs.registered(authenticatedUserService);
+    ThrowableTester.assertThrows(
+        () -> marketUserCompilerService
+            .call(MarketUserTestData.ID_IS_TERMS_ACCEPTED_FALSE)
+    ).assertException(UnauthorizedException.class);
+  }
+
+  @Test
+  @DisplayName(
+    "if the user is looking for another user and have no contract role, the error message is 'foo'"
+  )
+  void test3() {
+    AuthenticatedUserServiceStubs.registered(authenticatedUserService);
+    ThrowableTester.assertThrows(
+        () -> marketUserCompilerService
+            .call(MarketUserTestData.ID_IS_TERMS_ACCEPTED_FALSE)
+    ).assertMessageContains(MarketUserTestData.NO_CONTRACT_ROLE);
   }
 
 }
