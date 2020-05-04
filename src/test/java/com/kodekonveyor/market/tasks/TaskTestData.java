@@ -14,7 +14,7 @@ public class TaskTestData {
   public final static String DESCRIPTION =
       "New Task Description: documentation is updated End of Task Description of New Description";
 
-  public final static Long GITHUB_ID = 66L;
+  public final static Long GITHUB_ID = 66l;
 
   public final static String DIFFERENT_BEHAVIOUR = "Update tasks from github";
 
