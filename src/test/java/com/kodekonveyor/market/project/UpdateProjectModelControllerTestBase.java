@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.kodekonveyor.authentication.AuthenticatedUserService;
+import com.kodekonveyor.market.register.MarketUserEntityRepository;
 import com.kodekonveyor.market.tasks.TaskEntityRepository;
 import com.kodekonveyor.market.tasks.TaskEntityStubs;
 import com.kodekonveyor.market.tasks.UpdateTasksService;
@@ -29,9 +30,12 @@ public class UpdateProjectModelControllerTestBase {
   @Mock
   MilestoneEntityRepository milestoneEntityRepository;
 
+  @Mock
+  MarketUserEntityRepository marketUserEntityRepository;
+
   @BeforeEach
   void setUp() {
-    TaskEntityStubs.behaviour(taskEntityRepository);
+    TaskEntityStubs.behaviour(taskEntityRepository, marketUserEntityRepository);
     ProjectEntityRepositoryStubs.behaviour(projectEntityRepository);
     MilestoneEntityRepositoryStubs.behaviour(milestoneEntityRepository);
   }

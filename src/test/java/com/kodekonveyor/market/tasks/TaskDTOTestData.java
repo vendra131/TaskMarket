@@ -1,6 +1,7 @@
 package com.kodekonveyor.market.tasks;
 
 import com.kodekonveyor.market.register.MarketUserTestData;
+
 public class TaskDTOTestData {
 
   public static final TaskDTO getDifferentBehaviour() {
@@ -17,6 +18,8 @@ public class TaskDTOTestData {
     taskDTO.setBehaviour(TaskTestData.BEHAVIOUR);
     taskDTO.setGithubId(TaskTestData.GITHUB_ID);
     taskDTO.setDescription(TaskTestData.DESCRIPTION);
+    return taskDTO;
+  }
 
   public static final TaskDTO getNewDescription() {
     final TaskDTO taskDTO = get();

@@ -20,7 +20,7 @@ public class TaskEntityTestData {
   };
 
   public static final TaskEntity getDifferentBehaviour() {
-    final TaskEntity taskEntity = get();
+    final TaskEntity taskEntity = getMarketUserForProjectManager();
     taskEntity.setId(null);
     taskEntity.setBehaviour(TaskTestData.DIFFERENT_BEHAVIOUR);
     return taskEntity;
@@ -29,6 +29,12 @@ public class TaskEntityTestData {
   public static final TaskEntity getNewDescription() {
     final TaskEntity taskEntity = get();
     taskEntity.setDescription(TaskTestData.NEW_DESCRIPTION);
+    return taskEntity;
+  }
+
+  public static final TaskEntity getMarketUserForProjectManager() {
+    final TaskEntity taskEntity = get();
+    taskEntity.setMarketUser(MarketUserEntityTestData.getRoleProjectManager());
     return taskEntity;
   }
 }

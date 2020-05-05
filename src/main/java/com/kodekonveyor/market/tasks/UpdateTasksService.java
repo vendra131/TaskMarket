@@ -13,6 +13,8 @@ import com.kodekonveyor.market.UnauthorizedException;
 import com.kodekonveyor.market.lead.CheckRoleUtil;
 import com.kodekonveyor.market.project.ProjectEntity;
 import com.kodekonveyor.market.project.ProjectEntityRepository;
+import com.kodekonveyor.market.register.MarketUserEntity;
+import com.kodekonveyor.market.register.MarketUserEntityRepository;
 
 @Service
 public class UpdateTasksService {
@@ -26,6 +28,9 @@ public class UpdateTasksService {
   @Autowired
   private ProjectEntityRepository projectEntityRepository;
 
+  @Autowired
+  private MarketUserEntityRepository marketUserEntityRepository;
+
   public void call(final TaskDTO taskDTO) {
     final ProjectEntity project = projectEntityRepository
         .findByName(MarketConstants.KODE_KONVEYOR_PROJECT_NAME).get();
@@ -37,6 +42,10 @@ public class UpdateTasksService {
         taskEntityRepository.findByServiceAndBehaviour(
             taskDTO.getService(), taskDTO.getBehaviour()
         );
+
+    final Optional<MarketUserEntity> marketUser =
+        marketUserEntityRepository.findByUser(user);
+    final MarketUserEntity marketUserEntity = marketUser.get();
 
     if (taskEntityDB.isPresent()) {
       final TaskEntity taskEntity = taskEntityDB.get();
@@ -60,17 +69,18 @@ public class UpdateTasksService {
 
       }
     } else
-      storage(taskDTO);
+      storage(taskDTO, marketUserEntity);
   }
 
   private void storage(
-      final TaskDTO taskDTO
+      final TaskDTO taskDTO, final MarketUserEntity marketUserEntity
   ) {
     final TaskEntity taskEntity = new TaskEntity();
     taskEntity.setBehaviour(taskDTO.getBehaviour());
     taskEntity.setService(taskDTO.getService());
     taskEntity.setDescription(taskDTO.getDescription());
     taskEntity.setGithubId(taskDTO.getGithubId());
+    taskEntity.setMarketUser(marketUserEntity);
     taskEntityRepository.save(taskEntity);
   }
 
