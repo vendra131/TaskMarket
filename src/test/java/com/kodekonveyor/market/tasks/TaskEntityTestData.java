@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
+import com.kodekonveyor.market.project.ProjectEntityTestData;
 import com.kodekonveyor.market.register.MarketUserEntityTestData;
 
 @Generated("by zenta-tools")
@@ -15,7 +16,6 @@ public class TaskEntityTestData {
   public static final long ISSUE_ID_UPFORGRAB_CLOSED = 5997;
   public static final long ISSUE_ID_CLOSED = 9897;
   public static final long ISSUE_ID = 4422;
-  public static final String ISSUE_NAME = "SomeController/behaviour";
 
   public final static TaskEntity get() {
     final TaskEntity taskEntity = new TaskEntity();

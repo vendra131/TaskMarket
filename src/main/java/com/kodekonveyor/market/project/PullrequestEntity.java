@@ -15,7 +15,7 @@ import lombok.Data;
 @Generated("by zenta-tools")
 @Data
 @Entity
-public class PullrequestEntity {
+public class PullRequestEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

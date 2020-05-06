@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.kodekonveyor.market.project.ProjectEntity;
 import com.kodekonveyor.market.register.MarketUserEntity;
 
 import lombok.Data;
@@ -32,4 +33,7 @@ public class TaskEntity {
 
   private String service;
 
+  private TaskStatusEnum status;
+
+  private ProjectEntity project;
 }
