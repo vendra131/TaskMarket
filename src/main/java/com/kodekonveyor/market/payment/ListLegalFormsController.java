@@ -1,5 +1,7 @@
 package com.kodekonveyor.market.payment;
 
+import com.kodekonveyor.market.UrlMapConstants;;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -12,7 +14,7 @@ public class ListLegalFormsController {
   @Autowired
   private LegalFormEntityRepository legalFormEntityRepository;
 
-  @GetMapping("/legalform")
+  @GetMapping(UrlMapConstants.LIST_LEGAL_FORMS_PATH)
   public List<LegalFormDTO> call() {
     final Iterable<LegalFormEntity> allLegalForms =
         legalFormEntityRepository.findAll();
