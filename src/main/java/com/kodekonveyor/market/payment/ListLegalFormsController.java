@@ -1,18 +1,20 @@
 package com.kodekonveyor.market.payment;
 
-import com.kodekonveyor.market.UrlMapConstants;;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.kodekonveyor.market.UrlMapConstants;
+
+@RestController
 public class ListLegalFormsController {
 
   @Autowired
-  private LegalFormEntityRepository legalFormEntityRepository;
+  LegalFormEntityRepository legalFormEntityRepository;
 
   @GetMapping(UrlMapConstants.LIST_LEGAL_FORMS_PATH)
   public List<LegalFormDTO> call() {
