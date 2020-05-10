@@ -8969,15 +8969,6 @@ GithubConstants.DAILY = 24*60*60*1000
                      ancestor="efd0c5af-cdd1-4db0-b91e-e1ce0b8ec5d2"
                      source="383970bb-c6a0-4321-b961-41f8bb4aaeef"
                      target="81f3326b-3791-4e6d-a12d-36fe4f58c86e"/>
-            <element xsi:type="zenta:BasicObject"
-                     name="Controller"
-                     id="b7fcd2c9-d8d9-45d7-9e72-26a392834fb8"
-                     ancestor="5491f72b-93ec-4ad5-b6a9-2653fe808a03"/>
-            <element xsi:type="zenta:BasicRelationship"
-                     id="c87ad6bd-def5-479f-88fc-8d32b7cb3112"
-                     ancestor="3dd7b0b1-bd9f-4a13-b5d9-9db0200af5b8"
-                     source="383970bb-c6a0-4321-b961-41f8bb4aaeef"
-                     target="b7fcd2c9-d8d9-45d7-9e72-26a392834fb8"/>
          </folder>
          <folder name="GithubGraphqlService" id="f8031f57-13ac-4984-95e3-f1d3193bc503">
             <element xsi:type="zenta:ZentaDiagramModel"
