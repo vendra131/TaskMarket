@@ -8845,11 +8845,6 @@ If you have questions, see the [FAQ](https://kodekonveyor.com/coder-faq/), or as
                                     target="cf643ba3-c4f4-4a06-bf10-c8c77bd695f5"
                                     relationship="441706ac-eb9e-41fc-95c5-cff7a9196396"/>
                   <sourceConnection xsi:type="zenta:Connection"
-                                    id="d59703ff-9a68-44d1-939d-ff3192d1b382"
-                                    source="e55351e3-3999-4ba2-9f44-8fbc223ece6a"
-                                    target="c0a3de2b-367f-4d9a-bac0-f48dd0416819"
-                                    relationship="23e64f69-3ce7-4394-b3dd-cfd0c405a41a"/>
-                  <sourceConnection xsi:type="zenta:Connection"
                                     id="dfe6d488-5449-4fa1-baaf-5b3594a753f8"
                                     source="e55351e3-3999-4ba2-9f44-8fbc223ece6a"
                                     target="41109ab2-ee41-43a2-af51-94921765aab6"
@@ -8864,6 +8859,11 @@ If you have questions, see the [FAQ](https://kodekonveyor.com/coder-faq/), or as
                                     source="e55351e3-3999-4ba2-9f44-8fbc223ece6a"
                                     target="4fab179f-489c-44df-8381-e1e69f4499e5"
                                     relationship="4e614040-b546-423f-83e8-aefeeddbfba8"/>
+                  <sourceConnection xsi:type="zenta:Connection"
+                                    id="d59703ff-9a68-44d1-939d-ff3192d1b382"
+                                    source="e55351e3-3999-4ba2-9f44-8fbc223ece6a"
+                                    target="c0a3de2b-367f-4d9a-bac0-f48dd0416819"
+                                    relationship="23e64f69-3ce7-4394-b3dd-cfd0c405a41a"/>
                </child>
                <child xsi:type="zenta:DiagramObject"
                       id="7629e8a1-3264-4f86-93fd-4ae48d4f83b2"
@@ -8949,6 +8949,9 @@ If you have questions, see the [FAQ](https://kodekonveyor.com/coder-faq/), or as
 The last commit time, last review time, last commit time and its status can be retrieved by using GithubConstants.PULL_REQUEST_QUERY,
 substituing the project owner, project name and pull request id to it, and calling GithubGraphqlService with it. The relevant query string are 
 COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMENT_DATE_QUERY in GithubConstants.
+
+UngrabService must have a @Scheduled(fixedRate = GithubConstants.DAILY)
+GithubConstants.DAILY = 24*60*60*1000
 </documentation>
             </element>
             <element xsi:type="zenta:BasicRelationship"
@@ -8966,6 +8969,15 @@ COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMEN
                      ancestor="efd0c5af-cdd1-4db0-b91e-e1ce0b8ec5d2"
                      source="383970bb-c6a0-4321-b961-41f8bb4aaeef"
                      target="81f3326b-3791-4e6d-a12d-36fe4f58c86e"/>
+            <element xsi:type="zenta:BasicObject"
+                     name="Controller"
+                     id="b7fcd2c9-d8d9-45d7-9e72-26a392834fb8"
+                     ancestor="5491f72b-93ec-4ad5-b6a9-2653fe808a03"/>
+            <element xsi:type="zenta:BasicRelationship"
+                     id="c87ad6bd-def5-479f-88fc-8d32b7cb3112"
+                     ancestor="3dd7b0b1-bd9f-4a13-b5d9-9db0200af5b8"
+                     source="383970bb-c6a0-4321-b961-41f8bb4aaeef"
+                     target="b7fcd2c9-d8d9-45d7-9e72-26a392834fb8"/>
          </folder>
          <folder name="GithubGraphqlService" id="f8031f57-13ac-4984-95e3-f1d3193bc503">
             <element xsi:type="zenta:ZentaDiagramModel"
@@ -11472,6 +11484,11 @@ COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMEN
                               source="73f53cde-6cd8-40d3-9303-ae2882ff30e7"
                               target="c36bc183-8d4e-4631-a1a1-8889077088e3"
                               relationship="6aa7abca-186f-4eb9-8718-dfc675fdcfe1"/>
+            <sourceConnection xsi:type="zenta:Connection"
+                              id="f0629203-7d30-4ab8-8a4a-d6ffb2b356d2"
+                              source="73f53cde-6cd8-40d3-9303-ae2882ff30e7"
+                              target="84129780-9bc5-40e8-9f13-bc178b058d33"
+                              relationship="36189473-69ea-4096-a5ca-6b1f600cd5da"/>
          </child>
          <child xsi:type="zenta:DiagramObject"
                 id="3e671eae-be5f-4e4f-af58-8ca36f77862f"
@@ -11497,6 +11514,11 @@ COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMEN
                               source="3e671eae-be5f-4e4f-af58-8ca36f77862f"
                               target="8736c990-09a1-45a7-81ef-8df40a8c99ea"
                               relationship="5d7306fb-cb11-4fa6-a2be-2d236995217e"/>
+            <sourceConnection xsi:type="zenta:Connection"
+                              id="ca062a1e-a013-462f-a1ce-b78a49971d6f"
+                              source="3e671eae-be5f-4e4f-af58-8ca36f77862f"
+                              target="4c55488c-7ab7-4e07-9490-33a3f42f33a4"
+                              relationship="64efd95e-43c1-4bea-b781-d7fd5733523e"/>
          </child>
          <child xsi:type="zenta:DiagramObject"
                 id="90d1bb4c-1e76-4043-b3d4-11d25c7b5c8e"
@@ -12093,6 +12115,23 @@ COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMEN
                 zentaElement="5ed3c96e-3a7a-44b3-8bc3-3f5ba36afeb9">
             <bounds x="492" y="891" width="-1" height="-1"/>
          </child>
+         <child xsi:type="zenta:DiagramObject"
+                id="84129780-9bc5-40e8-9f13-bc178b058d33"
+                targetConnections="f0629203-7d30-4ab8-8a4a-d6ffb2b356d2"
+                zentaElement="84aae0df-6c27-455a-b44f-d07886229493">
+            <bounds x="780" y="444" width="-1" height="-1"/>
+         </child>
+         <child xsi:type="zenta:DiagramObject"
+                id="06932ff8-4d4c-4684-b443-850596907f6b"
+                zentaElement="72039c1a-d4a1-467a-bef5-c9a516c176eb">
+            <bounds x="208" y="601" width="-1" height="-1"/>
+         </child>
+         <child xsi:type="zenta:DiagramObject"
+                id="4c55488c-7ab7-4e07-9490-33a3f42f33a4"
+                targetConnections="ca062a1e-a013-462f-a1ce-b78a49971d6f"
+                zentaElement="72039c1a-d4a1-467a-bef5-c9a516c176eb">
+            <bounds x="1226" y="472" width="-1" height="-1"/>
+         </child>
       </element>
       <element xsi:type="zenta:BasicRelationship"
                id="c176dc18-816c-4e8a-81c5-c9754ff1abf3"
@@ -12158,6 +12197,16 @@ COMMIT_STATUS_QUERY, LAST_COMMIT_DATE_QUERY, LAST_REVIEW_DATE_QUERY, LAST_COMMEN
                ancestor="f0d0d4a5-201b-41b4-a047-70308c99bdb7"
                source="9d580595-f26d-405a-8169-14596def2211"
                target="5ed3c96e-3a7a-44b3-8bc3-3f5ba36afeb9"/>
+      <element xsi:type="zenta:BasicRelationship"
+               id="36189473-69ea-4096-a5ca-6b1f600cd5da"
+               ancestor="f0d0d4a5-201b-41b4-a047-70308c99bdb7"
+               source="51da13b8-1bc3-4629-b29f-954f2a57f6e8"
+               target="84aae0df-6c27-455a-b44f-d07886229493"/>
+      <element xsi:type="zenta:BasicRelationship"
+               id="64efd95e-43c1-4bea-b781-d7fd5733523e"
+               ancestor="f0d0d4a5-201b-41b4-a047-70308c99bdb7"
+               source="0c52fda6-fd1a-4b5c-b7d3-f0c6ee479ee3"
+               target="72039c1a-d4a1-467a-bef5-c9a516c176eb"/>
    </folder>
    <element xsi:type="zenta:ZentaDiagramModel"
             name="Application structure"
