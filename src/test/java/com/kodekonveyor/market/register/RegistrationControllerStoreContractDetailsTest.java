@@ -1,12 +1,12 @@
 package com.kodekonveyor.market.register;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -14,7 +14,7 @@ import org.mockito.quality.Strictness;
 
 import com.kodekonveyor.annotations.TestedBehaviour;
 import com.kodekonveyor.annotations.TestedService;
-import com.kodekonveyor.authentication.AuthenticatedUserStubs;
+import com.kodekonveyor.authentication.AuthenticatedUserServiceStubs;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -26,79 +26,90 @@ public class RegistrationControllerStoreContractDetailsTest
 
   @Test
   @DisplayName(
-    "The user is stored if all the information is correct"
+    "The Market user is saved successfully in repository"
   )
   void test() {
-    AuthenticatedUserStubs
-        .authenticated(authenticatedUserService);
-    registrationController.call(RegistrationInfoDTOTestData.get());
-    verify(marketUserEntityRepository).save(MarketUserEntityTestData.get());
+    AuthenticatedUserServiceStubs.unregistered(authenticatedUserService);
+    registrationController.call(MarketUserDTOTestData.getIdNull());
+    Mockito.verify(marketUserEntityRepository)
+        .save(MarketUserEntityTestData.getIdNewlySaved());
   }
 
   @Test
   @DisplayName(
-    "The country is stored in repository"
+    "The Market user's Id is saved successfully in repository"
   )
   void test1() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getCountry(),
-        UserLegalInfoEntityTestData.COUNTRY
+        MarketUserTestData.ID_NOT_IN_DATABASE,
+        MarketUserEntityTestData.getIdNewlySaved().getId()
     );
+
   }
 
   @Test
   @DisplayName(
-    "The Legal name is stored in repository"
+    "The Market user's balance is saved successfully in repository"
   )
   void test2() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getLegalName(),
-        UserLegalInfoEntityTestData.LEGALNAME
+        MarketUserTestData.ZERO_BALANCE,
+        MarketUserEntityTestData.getIdNewlySaved().getBalanceInCents()
     );
+
   }
 
   @Test
   @DisplayName(
-    "The Legal address is stored in repository"
+    "The Market user's email is saved successfully in repository"
   )
   void test3() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getLegalAddress(),
-        UserLegalInfoEntityTestData.ADDRESS
+        MarketUserDTOTestData.get().getEmail(),
+        MarketUserEntityTestData.getIdNewlySaved().getEmail()
     );
+
   }
 
   @Test
   @DisplayName(
-    "The email is stored in repository"
+    "The Market user's terms acceptance status successfully in repository"
   )
   void test4() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getEmail(),
-        UserLegalInfoEntityTestData.EMAIL
+        MarketUserDTOTestData.get().getIsTermsAccepted(),
+        MarketUserEntityTestData.getIdNewlySaved().getIsTermsAccepted()
     );
   }
 
   @Test
   @DisplayName(
-    "The payment details is stored in repository"
+    "The Market user's legal address is saved successfully in repository"
   )
   void test5() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getPaymentDetails(),
-        UserLegalInfoEntityTestData.PAYMENT_DETAILS
+        MarketUserDTOTestData.get().getLegalAddress(),
+        MarketUserEntityTestData.getIdNewlySaved().getLegalAddress()
     );
+
   }
 
   @Test
   @DisplayName(
-    "The payment regime is stored in repository"
+    "The Market user's legal name is saved successfully in repository"
   )
   void test6() {
+    registrationController.call(MarketUserDTOTestData.getIdNull());
     assertEquals(
-        MarketUserEntityTestData.get().getLegal().getPaymentRegime(),
-        UserLegalInfoEntityTestData.PAYMENT_REGIME
+        MarketUserDTOTestData.get().getLegalName(),
+        MarketUserEntityTestData.getIdNewlySaved().getLegalName()
     );
+
   }
 
 }

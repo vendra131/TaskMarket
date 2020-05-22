@@ -1,26 +1,43 @@
 package com.kodekonveyor.authentication;
 
+import javax.annotation.Generated;
+
+@Generated("by zenta-tools")
 public class RoleEntityTestData {
 
-  public static final String ROLE = "test_testrole";
-  public static final String ROLE_CAN_BE_PAYED = "can_be_payed";
-  public static final String ROLE_SALES = "kodekonveyor_sales";
-
-  public static final RoleEntity get() {
-    final RoleEntity role = new RoleEntity();
-    role.setName(ROLE);
-    return role;
+  public final static RoleEntity get() {
+    final RoleEntity roleEntity = new RoleEntity();
+    roleEntity.setId(RoleTestData.ID);
+    roleEntity.setName(RoleTestData.NAME);
+    return roleEntity;
   }
 
-  public static RoleEntity getNameCanBePayed() {
-    final RoleEntity role = get();
-    role.setName(ROLE_CAN_BE_PAYED);
-    return role;
+  public static RoleEntity getNameCanbepaid() {
+    final RoleEntity roleEntity = get();
+    roleEntity.setName(RoleTestData.NAME_CAN_BE_PAID);
+    roleEntity.setId(RoleTestData.ID_CAN_BE_PAID);
+    return roleEntity;
   }
 
-  public static final RoleEntity getNameSales() {
-    final RoleEntity role = get();
-    role.setName(ROLE_SALES);
-    return role;
+  public static RoleEntity getNameProjectManager() {
+    final RoleEntity roleEntity = new RoleEntity();
+    roleEntity.setId(RoleTestData.ID_PROJECT_MANAGER);
+    roleEntity.setName(RoleTestData.NAME_PROJECT_MANAGER);
+    return roleEntity;
   }
+
+  public static RoleEntity getRoleKodekonveyorContract() {
+    final RoleEntity roleEntity = new RoleEntity();
+    roleEntity.setId(RoleTestData.ID_KODEKONVEYOR_CONTRACT);
+    roleEntity.setName(RoleTestData.NAME_KODEKONVEYOR_CONTRACT);
+    return roleEntity;
+  }
+
+  public static RoleEntity getRoleSales() {
+    final RoleEntity roleEntity = new RoleEntity();
+    roleEntity.setId(RoleTestData.ID_KODEKONVEYOR_SALES);
+    roleEntity.setName(RoleTestData.NAME_KODEKONVEYOR_SALES);
+    return roleEntity;
+  }
+
 }

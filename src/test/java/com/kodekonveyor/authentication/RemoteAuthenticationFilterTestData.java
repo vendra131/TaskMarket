@@ -20,6 +20,10 @@ class RemoteAuthenticationFilterTestData {
   public static final String LOGIN_URL = "/some/url";
 
   public static final String NAME_HEADER = "OIDC_CLAIM_nickname";
+  public static final int EXPECTED_SET_AUTHENTICATION_CALLS = 2;
+
+  public static final String SUCCESSFULLY_LOGGED_IN =
+      "{} successfully logged in";
 
   public static final HttpServletRequest getRequest() {
     final HttpServletRequest request = mock(HttpServletRequest.class);
@@ -31,13 +35,13 @@ class RemoteAuthenticationFilterTestData {
 
   public static final HttpServletRequest getRequestUser() {
     final HttpServletRequest request = getRequest();
-    doReturn(UserEntityTestData.LOGIN).when(request).getHeader(NAME_HEADER);
+    doReturn(UserTestData.LOGIN).when(request).getHeader(NAME_HEADER);
     return request;
   }
 
   public static final ServletRequest getRequestUserUnknown() {
     final HttpServletRequest request = getRequest();
-    doReturn(UserEntityTestData.LOGIN_BAD).when(request).getHeader(NAME_HEADER);
+    doReturn(UserTestData.LOGIN_BAD).when(request).getHeader(NAME_HEADER);
     return request;
   }
 
