@@ -25,3 +25,7 @@ $(MODEL_BASENAME).zenta:
 
 removeGeneratedMetaInf:
 	rm -rf src/main/webapp/META-INF/
+
+model.html: model.docbook
+	zenta-xslt-runner -xsl:xslt/docbook2html.xslt -s:model.docbook -o:model.html toc.section.depth=15
+
