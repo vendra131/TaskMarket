@@ -23,13 +23,15 @@ public class ProjectTestData {
 
   public static final String NAME_KODE_KONVEYOR = "Kode Konveyor";
 
-  public static final String PROJECT_ID = "projectid";
+  public static final String URL = "project url goes here";
+
+  public static final String PROJECT_NAME = "project name";
+
+  public static final String PROJECT_ID = "project ID";
 
   public static final String DESCRIPTION = "description";
 
   public static final Long ID_ADD_FUNDS = 1523L;
-
-  public static final String URL = "url";
 
   public static final Long ID_BUDGET = 1525L;
 
