@@ -3,6 +3,7 @@ package com.kodekonveyor.market.register;
 import java.util.Set;
 
 import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,6 +43,7 @@ public class MarketUserEntity {
   private LegalFormEntity legalForm;
 
   @OneToOne(fetch = FetchType.LAZY)
+  @Column(unique = true)
   private UserEntity user;
 
   @OneToMany(fetch = FetchType.LAZY)
