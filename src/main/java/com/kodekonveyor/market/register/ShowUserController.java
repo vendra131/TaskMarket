@@ -32,21 +32,14 @@ public class ShowUserController {
 
     final Optional<MarketUserEntity> entityP =
         marketUserEntityRepository.findByUser(userEntity);
-    final MarketUserDTO marketUserDTO = new MarketUserDTO();
-    MarketUserEntity entity;
-    if (entityP.isEmpty()) {
-      entity = new MarketUserEntity();
-      entity.setUser(userEntity);
-      marketUserEntityRepository.save(entity);
-    } else
-      entity = entityP.get();
-    copyEntityToDTO(entity, marketUserDTO);
-    return marketUserDTO;
+
+    return entityP.map(this::copyEntityToDTO).orElse(null);
   }
 
-  private void copyEntityToDTO(
-      final MarketUserEntity entity, final MarketUserDTO marketUserDTO
+  private MarketUserDTO copyEntityToDTO(
+      final MarketUserEntity entity
   ) {
+    final MarketUserDTO marketUserDTO = new MarketUserDTO();
     marketUserDTO.setId(entity.getId());
     marketUserDTO.setPersonalName(entity.getPersonalName());
     marketUserDTO.setLegalName(entity.getLegalName());
@@ -64,5 +57,6 @@ public class ShowUserController {
           .setPaymentDetail(
               entity.getPaymentDetail().stream().map(PaymentDetailEntity::getId).collect(Collectors.toSet())
           );
+    return marketUserDTO;
   }
 }

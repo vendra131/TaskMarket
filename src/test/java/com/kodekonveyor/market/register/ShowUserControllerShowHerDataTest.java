@@ -1,5 +1,6 @@
 package com.kodekonveyor.market.register;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
@@ -45,13 +46,10 @@ public class ShowUserControllerShowHerDataTest
   }
 
   @Test
-  @DisplayName("If there is no MarketUserEntity for the user, it is created")
+  @DisplayName("If there is no MarketUserEntity for the user, it returns null")
   public void test1() {
     AuthenticatedUserServiceStubs.unregistered(authenticatedUserService);
     final MarketUserDTO result = showUserController.call();
-    assertEquals(
-        MarketUserDTOTestData.getIdNotInDatabase(),
-        result
-    );
+    assertNull(result);
   }
 }
