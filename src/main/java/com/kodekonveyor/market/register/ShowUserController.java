@@ -2,6 +2,7 @@ package com.kodekonveyor.market.register;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -33,7 +34,15 @@ public class ShowUserController {
     final Optional<MarketUserEntity> entityP =
         marketUserEntityRepository.findByUser(userEntity);
 
-    return entityP.map(this::copyEntityToDTO).orElse(null);
+    return entityP.map(this::copyEntityToDTO)
+        .orElse(createDTOFromUserEntity(userEntity));
+  }
+
+  private MarketUserDTO createDTOFromUserEntity(final UserEntity userEntity) {
+    final MarketUserDTO marketUserDTO = new MarketUserDTO();
+    marketUserDTO.setUser(userEntity.getId());
+    marketUserDTO.setPaymentDetail(Set.of());
+    return marketUserDTO;
   }
 
   private MarketUserDTO copyEntityToDTO(

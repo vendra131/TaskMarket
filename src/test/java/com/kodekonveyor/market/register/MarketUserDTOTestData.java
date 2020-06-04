@@ -42,7 +42,7 @@ public class MarketUserDTOTestData {
 
   public static MarketUserDTO getIdNotInDatabase() {
     final MarketUserDTO marketUserDTO = get();
-    marketUserDTO.setId(MarketUserTestData.ID_NOT_IN_DATABASE);
+    marketUserDTO.setId(null);
     marketUserDTO.setUser(UserTestData.ID_NO_MARKET_USER);
     marketUserDTO.setIsTermsAccepted(null);
     marketUserDTO.setEmail(null);
