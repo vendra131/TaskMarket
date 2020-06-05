@@ -41,6 +41,7 @@ public class ShowUserController {
   private MarketUserDTO createDTOFromUserEntity(final UserEntity userEntity) {
     final MarketUserDTO marketUserDTO = new MarketUserDTO();
     marketUserDTO.setUser(userEntity.getId());
+    marketUserDTO.setLogin(userEntity.getLogin());
     marketUserDTO.setPaymentDetail(Set.of());
     return marketUserDTO;
   }
@@ -57,6 +58,7 @@ public class ShowUserController {
     marketUserDTO.setIsTermsAccepted(entity.getIsTermsAccepted());
     marketUserDTO.setLegalAddress(entity.getLegalAddress());
     marketUserDTO.setUser(entity.getUser().getId());
+    marketUserDTO.setLogin(entity.getUser().getLogin());
     if (entity.getLegalForm() != null)
       marketUserDTO.setLegalForm(entity.getLegalForm().getId());
     if (entity.getPaymentDetail() == null)

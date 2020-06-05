@@ -22,6 +22,7 @@ public class MarketUserDTOTestData {
     marketUserDTO.setLegalName(MarketUserTestData.LEGAL_NAME);
     marketUserDTO.setPersonalName(MarketUserTestData.PERSONAL_NAME);
     marketUserDTO.setUser(UserTestData.ID);
+    marketUserDTO.setLogin(UserTestData.LOGIN);
     marketUserDTO.setBalanceInCents(MarketUserTestData.BALANCE_IN_CENTS);
     marketUserDTO.setLegalForm(LegalFormTestData.ID);
 
@@ -51,6 +52,7 @@ public class MarketUserDTOTestData {
     marketUserDTO.setPersonalName(null);
     marketUserDTO.setBalanceInCents(null);
     marketUserDTO.setLegalForm(null);
+    marketUserDTO.setLogin(UserTestData.LOGIN_NO_MARKET_USER);
 
     marketUserDTO.setPaymentDetail(new HashSet<>());
 
