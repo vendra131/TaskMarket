@@ -1,7 +1,6 @@
 package com.kodekonveyor.market.register;
 
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -41,7 +40,6 @@ public class ShowUserController {
     final MarketUserDTO marketUserDTO = new MarketUserDTO();
     marketUserDTO.setUser(userEntity.getId());
     marketUserDTO.setLogin(userEntity.getLogin());
-    marketUserDTO.setPaymentDetail(Set.of());
     return marketUserDTO;
   }
 
@@ -58,13 +56,11 @@ public class ShowUserController {
     marketUserDTO.setLegalAddress(entity.getLegalAddress());
     marketUserDTO.setUser(entity.getUser().getId());
     marketUserDTO.setLogin(entity.getUser().getLogin());
-    if (entity.getLegalForm() != null)
-      marketUserDTO.setLegalForm(entity.getLegalForm().getId());
-    if (entity.getPaymentDetail() != null)
-      marketUserDTO
-          .setPaymentDetail(
-              entity.getPaymentDetail().stream().map(PaymentDetailEntity::getId).collect(Collectors.toSet())
-          );
+    marketUserDTO.setLegalForm(entity.getLegalForm().getId());
+    marketUserDTO
+        .setPaymentDetail(
+            entity.getPaymentDetail().stream().map(PaymentDetailEntity::getId).collect(Collectors.toSet())
+        );
     return marketUserDTO;
   }
 }

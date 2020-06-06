@@ -1,6 +1,5 @@
 package com.kodekonveyor.market.register;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Generated;
@@ -53,17 +52,7 @@ public class MarketUserDTOTestData {
     marketUserDTO.setBalanceInCents(null);
     marketUserDTO.setLegalForm(null);
     marketUserDTO.setLogin(UserTestData.LOGIN_NO_MARKET_USER);
-
-    marketUserDTO.setPaymentDetail(new HashSet<>());
-
-    return marketUserDTO;
-  }
-
-  public static MarketUserDTO getIdNotInNullDatabase() {
-    final MarketUserDTO marketUserDTO = get();
-    marketUserDTO.setId(MarketUserTestData.ID_NOT_IN_DATABASE);
-    marketUserDTO.setUser(UserTestData.ID_IN_NULL_DATABASE);
-    marketUserDTO.setPaymentDetail(new HashSet<>());
+    marketUserDTO.setPaymentDetail(null);
 
     return marketUserDTO;
   }
