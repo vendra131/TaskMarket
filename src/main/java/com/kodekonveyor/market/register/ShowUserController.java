@@ -1,6 +1,5 @@
 package com.kodekonveyor.market.register;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,9 +60,7 @@ public class ShowUserController {
     marketUserDTO.setLogin(entity.getUser().getLogin());
     if (entity.getLegalForm() != null)
       marketUserDTO.setLegalForm(entity.getLegalForm().getId());
-    if (entity.getPaymentDetail() == null)
-      marketUserDTO.setPaymentDetail(new HashSet<>());
-    else
+    if (entity.getPaymentDetail() != null)
       marketUserDTO
           .setPaymentDetail(
               entity.getPaymentDetail().stream().map(PaymentDetailEntity::getId).collect(Collectors.toSet())
