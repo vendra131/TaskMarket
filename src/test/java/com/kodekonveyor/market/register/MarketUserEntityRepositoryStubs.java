@@ -128,4 +128,10 @@ public class MarketUserEntityRepositoryStubs {
 
   }
 
+  public static void userNewlyRegistered(final MarketUserEntityRepository marketUserEntityRepository){
+    doReturn(Optional.of(MarketUserEntityTestData.getIdNewlySaved()))
+            .when(marketUserEntityRepository)
+            .findByUser(UserEntityTestData.getIdNoMarketUser());
+  }
+
 }
